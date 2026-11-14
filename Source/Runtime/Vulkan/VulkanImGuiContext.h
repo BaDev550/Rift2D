@@ -21,7 +21,7 @@ namespace Runtime::RHI {
 		virtual void Flush(Runtime::RHI::CommandBuffer* cmd) const final;
 
 		virtual ImTextureID AddTexture(Image* image) final;
-		virtual void UpdateTexture(ImTextureID id) final;
+		virtual void RemoveTexture(ImTextureID id) final;
 	private:
 		VulkanContext& _owner;
 		VulkanQueue* _queue;

@@ -5,7 +5,7 @@
 #include <Runtime/Math/Vector3.h>
 
 namespace Runtime::Math {
-	TSTRUCT();
+	RSTRUCT();
 	struct Quat {
 		float w;
 		float x;

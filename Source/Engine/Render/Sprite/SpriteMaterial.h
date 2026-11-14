@@ -3,7 +3,7 @@
 #include <Runtime/Definitions/Types.h>
 #include <Engine/Asset/Asset.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	class SpriteMaterial final {
 	public:
 		[[nodiscard]] AssetHandle& GetDiffuseHandle() { return _diffuseHandle; }

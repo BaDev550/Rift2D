@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <string_view>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	class ReflectionSystem;
 	class PluginSystem;
 	class JobSystem;

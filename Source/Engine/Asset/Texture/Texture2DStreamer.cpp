@@ -14,50 +14,66 @@
 #include <Runtime/RHI/Image/RHIImage.h>
 #include <Runtime/RHI/Common/RHIUtils.h>
 #include <Runtime/Definitions/Profiler.h>
+#include <Engine/Asset/Texture/Texture2DImportSettings.h>
 
 #include <Runtime/IO/Path.h>
 
-namespace Tourqe::Engine {
-    Runtime::Result Texture2DStreamer::Cook(AssetSource& source) {
+namespace Rift::Engine {
+    Runtime::Result Texture2DStreamer::Cook(AssetSource& source, void* settings) {
         if (source.sourcePath.empty()) {
             return Runtime::Result("No source file provided!");
         }
 		auto platform = Engine::Get()->GetPlatformSystem()->GetPlatform();
 
+        TextureImportSettings importSettings;
+        if (settings) {
+            importSettings = *static_cast<TextureImportSettings*>(settings);
+        }
+
+        b8 compressed = importSettings.format != Runtime::RHI::Format::RGB8;
+        b8 flipV = importSettings.flipVertical;
+
         int width, height, comp;
         std::vector<u8> rawData;
-        std::vector<u8> compressedData;
+        std::vector<u8> imageData;
         platform->MapFile(source.sourcePath, rawData);
+        stbi_set_flip_vertically_on_load(flipV);
         u8* rawImageData = stbi_load_from_memory(rawData.data(), (rawData.size() * sizeof(u8)), &width, &height, &comp, 4);
+        rawData.clear();
         if (!rawImageData) {
-            stbi_image_free(rawImageData);
             return Runtime::Result("Failed to load image");
         }
 
-        ImageCompressor::CompressImageToBC3(rawImageData, width, height, compressedData);
+        if (compressed) {
+            ImageCompressor::CompressImageToBC3(rawImageData, width, height, imageData);
+        }
+        else {
+			usize imageByteSize = static_cast<usize>(width * height * comp);
+			imageData.assign(rawImageData, rawImageData + imageByteSize);
+        }
 
         stbi_image_free(rawImageData);
 
         Runtime::RHI::ImageDesc imageDesc{};
-        imageDesc.format = Runtime::RHI::Format::BC3;
+        imageDesc.format = importSettings.format;
         imageDesc.width = width;
         imageDesc.height = height;
-        imageDesc.sampler = Runtime::RHI::StaticSampler::NearestClamp;
+        imageDesc.sampler = importSettings.sampler;
         imageDesc.view.type = Runtime::RHI::ImageViewType::Image2D;
         imageDesc.usage = Runtime::RHI::ImageUsage::Sampled | Runtime::RHI::ImageUsage::TransferDst;
-        imageDesc.tileMode = Runtime::RHI::ImageTileMode::Optimal;
+        imageDesc.tileMode = importSettings.tile;
 
         AssetHeader header{};
         header.magic = TEXTURE2D_MAGIC;
         header.handle = source.handle;
         header.metaSize = sizeof(AssetHeader);
         std::strcpy(header.typeName, source.type.c_str());
-        header.dataSize = (compressedData.size() * sizeof(u8));
+        header.dataSize = imageData.size();
         header.dataOffset = (sizeof(AssetHeader) + sizeof(Runtime::RHI::ImageDesc));
 
         platform->WriteToFile(source.cookedPath, &header, sizeof(AssetHeader));
         platform->WriteToFile(source.cookedPath, &imageDesc, sizeof(Runtime::RHI::ImageDesc), sizeof(AssetHeader));
-        platform->WriteToFile(source.cookedPath, compressedData.data(), header.dataSize, header.dataOffset);
+        platform->WriteToFile(source.cookedPath, imageData.data(), header.dataSize, header.dataOffset);
         Logger::Info("Texture2DCooker", "Texture cooked to loc: {}", std::filesystem::absolute(source.cookedPath).string());
 
         return Runtime::Result();

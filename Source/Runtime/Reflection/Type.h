@@ -25,7 +25,7 @@ namespace Runtime::Reflection {
 		[[nodiscard]] const std::string& GetName() const { return _name; }
 		[[nodiscard]] usize GetSize() const { return _size; }
 		[[nodiscard]] usize GetAlignment() const { return _alignment; }
-		[[nodiscard]] const std::vector<Property>& GetProperties() const { return _properties; }
+		[[nodiscard]] const std::vector<Property>& GeRPROPerties() const { return _properties; }
 
 		const Property* FindProperty(std::string_view name) const {
 			for (const auto& prop : _properties) {
@@ -90,7 +90,7 @@ namespace Runtime::Reflection {
 		std::string _name;
 		usize _size;
 		usize _alignment;
-		bool _abstractClass;
+		bool _abstracRCLASS;
 
 		std::vector<Property> _properties;
 

@@ -79,17 +79,22 @@ namespace Runtime::PAL {
 	}
 
 	WindowsWindow::WindowsWindow(const WindowDesc& desc) : _desc(desc) {
+		_instance = GetModuleHandle(nullptr);
+
 		STARTUPINFO startup{};
 		GetStartupInfo(&startup);
 		int cmdShow = startup.wShowWindow;
+
+		HICON hLargeIcon = (HICON)LoadImage(_instance, MAKEINTRESOURCE(101), IMAGE_ICON, 32, 32, LR_DEFAULTCOLOR);
+		HICON hSmallIcon = (HICON)LoadImage(_instance, MAKEINTRESOURCE(101), IMAGE_ICON, 16, 16, LR_DEFAULTCOLOR);
 
 		WNDCLASSEX wc{};
 		wc.lpszClassName = TEXT(CLASSNAME);
 		wc.lpfnWndProc = WindowProc;
 		wc.cbSize = sizeof(WNDCLASSEX);
 		wc.style = 0;
-		wc.hIcon = LoadIcon(nullptr, IDI_APPLICATION);
-		wc.hIconSm = LoadIcon(nullptr, IDI_APPLICATION);
+		wc.hIcon = hLargeIcon ? hLargeIcon : LoadIcon(_instance, MAKEINTRESOURCE(101));
+		wc.hIconSm = hSmallIcon ? hSmallIcon : LoadIcon(_instance, MAKEINTRESOURCE(101));
 		wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
 		wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 		wc.lpszMenuName = nullptr;
@@ -116,6 +121,9 @@ namespace Runtime::PAL {
 			Logger::Error("WindowsWindow", "Failed to create window");
 			return;
 		}
+
+		if (hLargeIcon) SendMessage(_handle, WM_SETICON, ICON_BIG, (LPARAM)hLargeIcon);
+		if (hSmallIcon) SendMessage(_handle, WM_SETICON, ICON_SMALL, (LPARAM)hSmallIcon);
 
 		ShowWindow(_handle, desc.maximized ? SW_SHOWMAXIMIZED : SW_SHOWNORMAL);
 		UpdateWindow(_handle);

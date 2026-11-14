@@ -5,7 +5,7 @@
 #include <Runtime/Reflection/ReflectObject.h>
 #include <Engine/Render/RenderFrame.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	class GraphicsSubsystem;
 
 	enum class RenderStage : i32 {
@@ -16,7 +16,7 @@ namespace Tourqe::Engine {
 		Final = 4000
 	};
 
-	TCLASS();
+	RCLASS();
 	class RenderPass : public Runtime::Reflection::ReflectObject {
 		GENERATE_CLASS(RenderPass)
 	public:

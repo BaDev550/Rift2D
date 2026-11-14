@@ -5,7 +5,7 @@
 #include <Engine/World/WorldSubsystem.h>
 #include <Runtime/Reflection/Type.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	EntityHandle Scene::CreateEntity() {
 		return _entityFactory.Create();
 	}
@@ -98,7 +98,7 @@ namespace Tourqe::Engine {
 		const Runtime::Reflection::Type* pType = _reflection->GetType(typeId);
 		if (!pType)
 		{
-			Logger::Error("Scene", "Component type is not reflected. Did you forget TCLASS or to regenerate?");
+			Logger::Error("Scene", "Component type is not reflected. Did you forget RCLASS or to regenerate?");
 			return nullptr;
 		}
 

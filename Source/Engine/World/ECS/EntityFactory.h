@@ -3,7 +3,7 @@
 #include <Engine/World/ECS/EntityDefinitions.h>
 #include <Engine/Core/Core.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	class ENGINE_API EntityFactory final {
 	public:
 		EntityFactory();

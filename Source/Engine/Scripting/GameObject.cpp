@@ -5,7 +5,7 @@
 #include <Engine/World/Components/TransformComponent.h>
 #include <Engine/World/Components/IdenityComponent.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	const std::string& GameObject::GetName() const { return GetOwningScene()->FindComponent<IdenityComponent>(_handle)->name; }
 
 	[[nodiscard]] Runtime::Math::Vec3 GameObject::GetPosition() const { return GetOwningScene()->FindComponent<TransformComponent>(_handle)->position; }

@@ -1,23 +1,23 @@
 #pragma once
 
 #include <Engine/World/Components/BaseComponent.h>
-#include <Runtime/Containers/UUID.h>
+#include <Engine/Asset/Asset.h>
 
-namespace Tourqe::Engine {
-	TCLASS();
+namespace Rift::Engine {
+	RCLASS();
 	class SpriteComponent : public BaseComponent {
 		GENERATE_CLASS(SpriteComponent);
 	public:
-		TPROP(Edit, Serialize, AssetType = "Texture2D")
+		RPROP(Edit, Serialize, AssetType = "Texture2D")
 		AssetHandle TextureAssetHandle = 0;
 
-		TPROP(Edit, Serialize)
+		RPROP(Edit, Serialize)
 		b8 Visible;
 
-		TPROP(Edit, Serialize)
+		RPROP(Edit, Serialize)
 		b8 CastShadow = true;
 
-		TPROP(Edit, Serialize, Catagory = "Render")
+		RPROP(Edit, Serialize, Catagory = "Render")
 		int zOrder = 0;
 	};
 

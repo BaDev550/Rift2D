@@ -13,7 +13,7 @@
 #include <Windows.h>
 #endif
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 
 	JobSystem::JobSystem() {
 		const u32 hw = std::max(1u, std::thread::hardware_concurrency());
@@ -170,7 +170,7 @@ namespace Tourqe::Engine {
 #ifdef _WIN32
 		HANDLE hThread = GetCurrentThread();
 
-		const std::wstring name = (priority == JobPriority::High ? L"Tourqe Job High " : L"Tourqe Job Low ")
+		const std::wstring name = (priority == JobPriority::High ? L"Rift Job High " : L"Rift Job Low ")
 			+ std::to_wstring(index);
 		SetThreadDescription(hThread, name.c_str());
 

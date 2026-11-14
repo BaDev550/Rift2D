@@ -2,8 +2,8 @@
 #include <Engine/Asset/Asset.h>
 #include <Runtime/RHI/Shader/ShaderDesc.h>
 
-namespace Tourqe::Engine {
-	TCLASS();
+namespace Rift::Engine {
+	RCLASS();
 	class ENGINE_API Shader final : public Asset {
 		GENERATE_CLASS(Shader);
 	public:

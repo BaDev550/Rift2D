@@ -4,8 +4,8 @@
 #include <Runtime/RHI/Image/RHIImage.h>
 #include <Runtime/Math/Vector3.h>
 
-namespace Tourqe::Engine {
-	TCLASS();
+namespace Rift::Engine {
+	RCLASS();
 	class ENGINE_API LightPass : public RenderPass { // TEMP PASS
 		GENERATE_CLASS(LightPass)
 	public:

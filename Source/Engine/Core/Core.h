@@ -17,7 +17,7 @@
 #define COLOR_GREEN 0x00FF00FF
 #define COLOR_BLUE 0x0000FFFF
 
-#define CACHE_DIR Runtime::Path("cache/")
-#define COOKED_ASSET_DIR Runtime::Path("cooked/")
-#define ASSET_EXTENSION ".casset"
+#define CACHE_DIR Runtime::Path("Cache/")
+#define COOKED_ASSET_DIR Runtime::Path("Cooked/")
 #define ASSET_REGISTRY_PATH (CACHE_DIR / Runtime::Path("assetReg.json"))
+#define ASSET_EXTENSION ".rasset"

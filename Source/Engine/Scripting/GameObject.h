@@ -8,10 +8,10 @@
 #include <Engine/World/Components/IdenityComponent.h>
 #include <Engine/World/Components/TransformComponent.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	class Scene;
 
-	TCLASS();
+	RCLASS();
 	class ENGINE_API GameObject : public Runtime::Reflection::ReflectObject {
 		GENERATE_CLASS(GameObject);
 	public:

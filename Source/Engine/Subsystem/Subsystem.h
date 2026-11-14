@@ -10,7 +10,7 @@
 #include <list>
 #include <set>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	enum class DependencyOrder {
 		Before = 0,
 		After
@@ -19,8 +19,8 @@ namespace Tourqe::Engine {
 	constexpr inline std::string_view OrderToString(DependencyOrder order) {
 		switch (order)
 		{
-		case Tourqe::Engine::DependencyOrder::Before: return "Before";
-		case Tourqe::Engine::DependencyOrder::After: return "After";
+		case Rift::Engine::DependencyOrder::Before: return "Before";
+		case Rift::Engine::DependencyOrder::After: return "After";
 		default:
 			break;
 		}

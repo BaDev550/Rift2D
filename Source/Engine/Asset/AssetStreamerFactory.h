@@ -5,7 +5,7 @@
 #include <functional>
 #include <typeindex>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	class AssetStreamer;
 
 	struct AssetStreamerEntry {
@@ -37,18 +37,18 @@ namespace Tourqe::Engine {
 
 #define REGISTER_ASSETSTREAMER(Type) \
 	namespace { \
-		Tourqe::Engine::AssetStreamer* Type##_create() { \
-			auto* streamer = Runtime::Mem::Allocator::Construct<Tourqe::Engine::Type>(); \
+		Rift::Engine::AssetStreamer* Type##_create() { \
+			auto* streamer = Runtime::Mem::Allocator::Construct<Rift::Engine::Type>(); \
 			return streamer; \
 		} \
 		struct Type##_register { \
 			Type##_register() { \
-				Tourqe::Engine::AssetStreamerEntry entry{}; \
-				entry.size = sizeof(Tourqe::Engine::Type); \
-				entry.alignment = alignof(Tourqe::Engine::Type); \
-				entry.type = typeid(Tourqe::Engine::Type); \
+				Rift::Engine::AssetStreamerEntry entry{}; \
+				entry.size = sizeof(Rift::Engine::Type); \
+				entry.alignment = alignof(Rift::Engine::Type); \
+				entry.type = typeid(Rift::Engine::Type); \
 				entry.constructFunc = &Type##_create; \
-				Tourqe::Engine::AssetStreamerFactory::Factory().Register(entry); \
+				Rift::Engine::AssetStreamerFactory::Factory().Register(entry); \
 			} \
 		}; \
 		static Type##_register s_##Type##_register; \

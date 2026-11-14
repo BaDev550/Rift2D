@@ -15,7 +15,7 @@
 #include <nlohmann/json.hpp>
 #include <fstream>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	Runtime::Result AssetSubsystem::OnCreate(Engine* engine)
 	{
 		Subsystem::OnCreate(engine);

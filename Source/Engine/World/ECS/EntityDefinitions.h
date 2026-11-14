@@ -4,7 +4,7 @@
 #include <Runtime/Containers/UUID.h>
 #include <bitset>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	static constexpr u32 EstimatedEntities = 2048;
 	static constexpr u32 MaxComponents = 256;
 	
@@ -23,8 +23,8 @@ namespace Tourqe::Engine {
 
 namespace std {
 	template<>
-	struct hash<Tourqe::Engine::EntityHandle> {
-		size_t operator()(const Tourqe::Engine::EntityHandle& handle) const noexcept {
+	struct hash<Rift::Engine::EntityHandle> {
+		size_t operator()(const Rift::Engine::EntityHandle& handle) const noexcept {
 			const u64 packed = (static_cast<u64>(handle.generation) << 32) | static_cast<u64>(handle.index);
 			return hash<u64>()(packed);
 		}

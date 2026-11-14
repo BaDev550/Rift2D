@@ -3,7 +3,7 @@
 #include <Engine/Core/Engine.h>
 #include <Engine/Platform/PlatformSystem.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
     ReflectionSystem::ReflectionSystem() {
 		auto platform = Engine::Get()->GetPlatformSystem()->GetPlatform();
 		using GenerateFn = void(*)(std::vector<Runtime::Reflection::Type>*);

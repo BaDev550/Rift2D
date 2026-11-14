@@ -58,14 +58,19 @@ namespace Runtime {
 				return *this;
 			}
 
-			if (_path.size() > baseStr.size() && StartsWithCaseInsensitive(_path, baseStr) && _path[baseStr.size()] == '/') {
-				return Path(_path.substr(baseStr.size() + 1));
+			std::string currentPath = _path;
+			if (currentPath.size() > baseStr.size() && StartsWithCaseInsensitive(currentPath, baseStr) && (currentPath[baseStr.size()] == '/' || currentPath[baseStr.size()] == '\\')) {
+				return Path(currentPath.substr(baseStr.size() + 1));
 			}
 
 			std::string marker = "/" + baseStr + "/";
-			usize pos = FindCaseInsensitive(_path, marker);
+			usize pos = FindCaseInsensitive(currentPath, marker);
 			if (pos != std::string::npos) {
-				return Path(_path.substr(pos + marker.size()));
+				return Path(currentPath.substr(pos + marker.size()));
+			}
+
+			if (currentPath == baseStr) {
+				return Path("");
 			}
 
 			return *this;
@@ -79,7 +84,7 @@ namespace Runtime {
 		bool operator!=(const Path& other) const { return _path != other._path; }
 		operator bool() const { return !_path.empty(); }
 		operator std::string() const { return _path; }
-	private:
+
 		static std::string Normalize(std::string_view raw) {
 			std::string res;
 			res.reserve(raw.size());
@@ -119,6 +124,7 @@ namespace Runtime {
 			return std::string::npos;
 		}
 
+	private:
 		std::string _path = "\0";
 		u32 _cachedParentDirStrPos = ~0ull; //mybe?
 		u32 _cachedExtensionStrPos = ~0ull;

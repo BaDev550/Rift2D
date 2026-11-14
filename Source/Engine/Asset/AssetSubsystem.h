@@ -8,7 +8,7 @@
 #include <Runtime/IO/Path.h>
 #include <unordered_set>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	class ENGINE_API AssetSubsystem final : public Subsystem {
 	public:
 		virtual Runtime::Result OnCreate(Engine* engine) override;
@@ -27,47 +27,53 @@ namespace Tourqe::Engine {
 		}
 
 		template<class AssetT> requires(std::is_base_of_v<Asset, AssetT>)
-		AssetT* Get(const std::string& path) {
-			std::string assetType = AssetT::GetStaticClassName().data();
-
-			Runtime::Path inputPath(path);
-			Runtime::Path sourcePath = inputPath.Relative("Assets");
-
-			AssetHandle assetID;
-			assetID.index = static_cast<u32>(std::hash<std::string>{}(sourcePath.GetPathStr()));
-
-			if (Asset* existing = TryAsset(assetID)) { return static_cast<AssetT*>(existing); }
-
-			if (AssetInCache(assetID)) {
-				Logger::Info("AssetSubsystem", "Asset in registry loading...");
-				return static_cast<AssetT*>(Load(assetID));
+		AssetT* Get(const std::string& path, void* extraSettings = nullptr) {
+			const std::string assetPath = Runtime::Path::Normalize(path);
+			if (assetPath.empty()) {
+				Logger::Error("AssetSubsystem", "Empty asset path");
+				return nullptr;
 			}
-			else {
-				Runtime::Path targetPath = (COOKED_ASSET_DIR / Runtime::Path(path).ReplaceExtension(ASSET_EXTENSION));
-				AssetStreamer* streamer = GetAssetCookerOfType(assetType);
 
-				if (streamer) {
-					AssetSource source;
-					source.handle = assetID;
-					source.type = assetType;
-					source.sourcePath = sourcePath.GetPathStr();
-					source.cookedPath = targetPath.GetPathStr();
+			AssetHandle handle;
+			handle.index = HashPath(assetPath);
 
-					Runtime::Result result = streamer->Cook(source);
-					if (result) {
-						_cachedAssetSources[source.handle] = source;
-						AssetT* ast = static_cast<AssetT*>(Load(source.handle));
+			if (Asset* existing = TryAsset(handle)) return static_cast<AssetT*>(existing);
 
-						SaveRegistry();
-						return ast;
-					}
-					else {
-						Logger::Error("AssetSubsystem", "Failed to cook asset: {}", result.GetMessage());
-					}
-					return nullptr;
-				}
+			if (AssetInCache(handle)) {
+				if (Asset* loaded = Load(handle)) return static_cast<AssetT*>(loaded);
+				_cachedAssetSources.erase(handle);
 			}
-			return nullptr;
+
+			const std::string assetType = AssetT::GetStaticClassName().data();
+			AssetStreamer* streamer = GetAssetCookerOfType(assetType);
+			if (!streamer) {
+				Logger::Error("AssetSubsystem", "No streamer for type '{}'", assetType);
+				return nullptr;
+			}
+
+			Runtime::Path targetPath = COOKED_ASSET_DIR / Runtime::Path(CookedRelativePath(assetPath)).ReplaceExtension(ASSET_EXTENSION);
+
+			AssetSource source;
+			source.handle = handle;
+			source.type = assetType;
+			source.sourcePath = assetPath;
+			source.cookedPath = targetPath.GetPathStr();
+
+			Runtime::Result result = streamer->Cook(source, extraSettings);
+			if (!result) {
+				Logger::Error("AssetSubsystem", "Failed to cook asset: {}", result.GetMessage());
+				return nullptr;
+			}
+
+			_cachedAssetSources[handle] = source;
+			Asset* loaded = Load(handle);
+			if (!loaded) {
+				_cachedAssetSources.erase(handle);
+				return nullptr;
+			}
+
+			SaveRegistry();
+			return static_cast<AssetT*>(loaded);
 		}
 
 		Asset* TryAsset(AssetHandle handle) {
@@ -95,5 +101,18 @@ namespace Tourqe::Engine {
 		std::unordered_map<std::string, u32> _assetStreamerLookupTable;
 
 		std::unordered_map<AssetHandle, Asset*> _assets;
+
+		static std::string CookedRelativePath(std::string p) {
+			if (p.size() >= 2 && p[1] == ':') p.erase(0, 2);
+			while (!p.empty() && p.front() == '/') p.erase(0, 1);
+			for (usize pos; (pos = p.find("../")) != std::string::npos; ) p.erase(pos, 3);
+			return p;
+		}
+
+		static u32 HashPath(std::string_view s) {
+			u32 h = 2166136261u;
+			for (char c : s) { h ^= static_cast<u32>(std::tolower(static_cast<unsigned char>(c))); h *= 16777619u; }
+			return h;
+		}
 	};
 }

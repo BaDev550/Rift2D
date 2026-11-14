@@ -7,9 +7,9 @@ namespace Runtime::Reflection {
 	struct TypeAccessor;
 }
 
-#define TCLASS(...)
-#define TSTRUCT(...) // TODO(0x): implement struct reflection support
-#define TPROP(...)
+#define RCLASS(...)
+#define RSTRUCT(...) // TODO(0x): implement struct reflection support
+#define RPROP(...)
 
 #define GENERATE_CLASS(ClassType) \
 public: \

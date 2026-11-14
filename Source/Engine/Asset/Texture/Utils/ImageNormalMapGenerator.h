@@ -7,7 +7,7 @@
 #include <Runtime/RHI/Image/RHIImageLayout.h>
 #include <mutex>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	struct NormalGen {
 		Runtime::RHI::Image* srcDiffuse;
 		Runtime::RHI::Image* dstNormal;

@@ -4,7 +4,7 @@
 #include <Runtime/RHI/Buffer/RHIBuffer.h>
 #include <Runtime/Math/Mat4.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	struct RenderItem {
 		Runtime::Math::Mat4 world = Runtime::Math::Mat4();
 

@@ -6,7 +6,7 @@
 #include <Engine/Render/RenderQueue.h>
 #include <glm/glm.hpp>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	struct RenderFrame {
 		Runtime::RHI::CommandBuffer* cmd = nullptr;
 		Runtime::RHI::Image* color = nullptr;

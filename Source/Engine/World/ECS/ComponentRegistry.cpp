@@ -3,7 +3,7 @@
 #include <Runtime/Definitions/Logger.h>
 #include <Runtime/Memory/Allocator.h> // memory ismini sikicem
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	ComponentRegistry::~ComponentRegistry() {
 		Clear();
 	}

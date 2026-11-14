@@ -5,13 +5,13 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	struct AssetSource {
 		AssetHandle handle;
 		std::string sourcePath;
 		std::string cookedPath;
 		std::string type;
-
+		
 		AssetSource() = default;
 		AssetSource(AssetHandle handle_, std::string srcPath_, std::string ckPath_, std::string type_) 
 			: handle(std::move(handle_)), sourcePath(std::move(srcPath_)), cookedPath(std::move(ckPath_)), type(std::move(type_)) {}

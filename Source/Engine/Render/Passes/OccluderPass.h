@@ -10,8 +10,8 @@
 
 #include <Engine/Render/LightData.h>
 
-namespace Tourqe::Engine {
-	TCLASS();
+namespace Rift::Engine {
+	RCLASS();
 	class ENGINE_API OccluderPass final : public RenderPass {
 		GENERATE_CLASS(OccluderPass)
 	public:

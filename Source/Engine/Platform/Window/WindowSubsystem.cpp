@@ -2,7 +2,7 @@
 #include <Engine/Platform/PlatformSystem.h>
 #include <Engine/Core/Engine.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	Runtime::Result WindowSubsystem::OnCreate(Engine* engine)
 	{
 		Subsystem::OnCreate(engine);
@@ -11,7 +11,7 @@ namespace Tourqe::Engine {
 		Runtime::PAL::WindowDesc desc{};
 		desc.width = 800;
 		desc.height = 800;
-		desc.title = "Engine Debug Window";
+		desc.title = "Rift 2D";
 		_window = platform->CreateNewWindow(desc);
 		if (!_window) return Runtime::Result("Failed to create window");
 

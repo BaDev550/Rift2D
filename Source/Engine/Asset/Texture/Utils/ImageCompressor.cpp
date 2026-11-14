@@ -3,7 +3,7 @@
 #include <Runtime/Definitions/Logger.h>
 #include <Runtime/Definitions/Profiler.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	b8 ImageCompressor::CompressImageToBC3(u8* rawData, u32 width, u32 height, std::vector<u8>& compressedImage) {
 		compressedImage.clear();
 

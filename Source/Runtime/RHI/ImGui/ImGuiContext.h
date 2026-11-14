@@ -20,6 +20,6 @@ namespace Runtime::RHI {
 		virtual void Flush(Runtime::RHI::CommandBuffer* cmd) const = 0;
 
 		virtual ImTextureID AddTexture(Image* image) = 0;
-		virtual void UpdateTexture(ImTextureID id) = 0;
+		virtual void RemoveTexture(ImTextureID id) = 0;
 	};
 }

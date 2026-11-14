@@ -7,7 +7,7 @@
 #include <Runtime/PAL/PlatformEvent.h>
 #include <Runtime/PAL/KeyCodes.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	class ENGINE_API InputSubsystem final : public Subsystem {
 	public:
 		virtual Runtime::Result OnCreate(Engine* engine) final;

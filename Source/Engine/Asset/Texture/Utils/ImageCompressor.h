@@ -4,7 +4,7 @@
 #include <nvtt/nvtt.h>
 #include <vector>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	struct NvttVectorOutputHandler : public nvtt::OutputHandler {
 		std::vector<u8>& _buffer;
 

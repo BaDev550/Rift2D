@@ -8,14 +8,14 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	void LightPass::OnInitialize() {
 		auto* assetSystem = GetEngine()->GetSubsystem<AssetSubsystem>();
 		auto* renderSystem = GetEngine()->GetSubsystem<GraphicsSubsystem>();
 		auto* context = renderSystem->GetContext();
 
-		Shader* lightVert = assetSystem->Get<Shader>("2D_light_vert.vert");
-		Shader* lightFrag = assetSystem->Get<Shader>("2D_light_frag.frag");
+		Shader* lightVert = assetSystem->Get<Shader>("Shaders/2D_light_vert.vert");
+		Shader* lightFrag = assetSystem->Get<Shader>("Shaders/2D_light_frag.frag");
 
 		Runtime::RHI::PushConstantRange pcRange{};
 		pcRange.size = sizeof(LightPushConstant);
@@ -83,7 +83,7 @@ namespace Tourqe::Engine {
 			}
 
 			frame.cmd->EndDynamicRendering();
-			frame.cmd->TransitionImageLayout(frame.color, Runtime::RHI::ImageLayout::PresentSrc);
+			frame.cmd->TransitionImageLayout(frame.color, Runtime::RHI::ImageLayout::ShaderReadOnly);
 		}
 	}
 }

@@ -3,7 +3,7 @@
 #include <Runtime/Math/Vector2.h>
 #include <Runtime/Math/Vector3.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	struct SpriteVertex {
 		Runtime::Math::Vec3 pos;
 		Runtime::Math::Vec3 norm;

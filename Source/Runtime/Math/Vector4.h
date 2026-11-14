@@ -5,7 +5,7 @@
 #include <math.h>
 
 namespace Runtime::Math {
-	TSTRUCT();
+	RSTRUCT();
 	struct Vec4 {
 		f32 x;
 		f32 y;

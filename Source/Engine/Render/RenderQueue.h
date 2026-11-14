@@ -3,7 +3,7 @@
 #include <Engine/Render/RenderItem.h>
 #include <array>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	enum class RenderQueue : u32 {
 		Opaque,
 		Transparent,

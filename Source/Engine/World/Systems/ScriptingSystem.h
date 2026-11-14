@@ -4,7 +4,7 @@
 #include <Engine/World/System.h>
 #include <Engine/Scripting/GameObject.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	class ENGINE_API ScriptingSystem final : public System {
 	public:
 		virtual Runtime::Result OnCreate() override;

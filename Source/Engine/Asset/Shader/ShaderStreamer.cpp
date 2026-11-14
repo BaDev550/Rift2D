@@ -10,8 +10,8 @@
 
 #include <fstream>
 
-namespace Tourqe::Engine {
-	Runtime::Result ShaderStreamer::Cook(AssetSource& source) { // TEMP!!!!! FIX IT FUCKED UP RHI
+namespace Rift::Engine {
+	Runtime::Result ShaderStreamer::Cook(AssetSource& source, void* settings) { // TEMP!!!!! FIX IT FUCKED UP RHI
 		if (source.sourcePath.empty()) {
 			return Runtime::Result("No source file provided!");
 		}
@@ -110,14 +110,31 @@ namespace Tourqe::Engine {
 		std::filesystem::path reqPath(requesting_source);
 		std::filesystem::path targetPath = reqPath.parent_path() / requested_source;
 
-		std::ifstream file(std::filesystem::exists(targetPath) ? targetPath : requested_source, std::ios::binary);
+		if (!std::filesystem::exists(targetPath)) {
+			std::filesystem::path fallbackPath = std::filesystem::path("Shaders") / requested_source;
+			if (std::filesystem::exists(fallbackPath)) {
+				targetPath = fallbackPath;
+			}
+			else {
+				std::filesystem::path assetsFallback = std::filesystem::path("Assets/Shaders") / requested_source;
+				if (std::filesystem::exists(assetsFallback)) {
+					targetPath = assetsFallback;
+				}
+			}
+		}
+
+		std::ifstream file(targetPath, std::ios::binary);
 
 		if (!file.is_open()) {
-			result->source_name = "";
-			result->source_name_length = 0;
-			result->content = "File not found";
-			result->content_length = 14;
-			result->user_data = nullptr;
+			std::string errorMsg = "File not found: " + std::string(requested_source);
+			auto* nameStr = new std::string(requested_source);
+			auto* contentStr = new std::string(errorMsg);
+
+			result->source_name = nameStr->c_str();
+			result->source_name_length = nameStr->length();
+			result->content = contentStr->c_str();
+			result->content_length = contentStr->length();
+			result->user_data = new std::pair(contentStr, nameStr);
 			return result;
 		}
 

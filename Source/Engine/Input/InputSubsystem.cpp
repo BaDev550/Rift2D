@@ -4,7 +4,7 @@
 
 #include <Runtime/PAL/PlatformEvent.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	Runtime::Result InputSubsystem::OnCreate(Engine* engine) {
 		Subsystem::OnCreate(engine);
 

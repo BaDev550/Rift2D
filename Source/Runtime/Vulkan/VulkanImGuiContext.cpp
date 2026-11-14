@@ -119,9 +119,10 @@ namespace Runtime::RHI {
 		return (ImTextureID)set;
 	}
 
-	void VulkanImGuiContext::UpdateTexture(ImTextureID id) {
-
-	}
-
 	void* VulkanImGuiContext::GetNativeImGui() const { return ImGui::GetCurrentContext(); }
+
+	void VulkanImGuiContext::RemoveTexture(ImTextureID id) {
+		if (!id) return;
+		ImGui_ImplVulkan_RemoveTexture((VkDescriptorSet)id);
+	}
 }

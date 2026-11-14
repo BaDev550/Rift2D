@@ -3,7 +3,7 @@
 #include <Runtime/Math/Vector2.h>
 #include <Runtime/Math/Vector4.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	struct LightData {
 		Runtime::Math::Vec2 lightPos = { 0.0f, 0.0f };
 		f32 lightRadius = 5.0f;

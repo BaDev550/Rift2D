@@ -1,7 +1,7 @@
 #include "ScriptingSystem.h"
 #include <Engine/Reflection/ReflectionSystem.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	Runtime::Result ScriptingSystem::OnCreate() {
 		return Runtime::Result();
 	}
@@ -34,7 +34,7 @@ namespace Tourqe::Engine {
 
 	b8 ScriptingSystem::IsScriptable(EntityHandle handle) const { return _gameObjectLookupTable.find(handle) != _gameObjectLookupTable.end(); }
 
-	Tourqe::Engine::GameObject* ScriptingSystem::GetGameObject(EntityHandle handle) const {
+	Rift::Engine::GameObject* ScriptingSystem::GetGameObject(EntityHandle handle) const {
 		auto it = _gameObjectLookupTable.find(handle);
 		if (it == _gameObjectLookupTable.end()) {
 			return nullptr;

@@ -2,7 +2,7 @@
 
 #include <Engine/Render/Sprite/SpriteVertex.h>
 
-namespace Tourqe::Engine { // CHANGE TS
+namespace Rift::Engine { // CHANGE TS
 	static constexpr u32 MaxSprites = 1000; // TODO(0x): find a efficent 256< data to store sprite data
 
 	static const SpriteVertex SpriteVertices[6] = {

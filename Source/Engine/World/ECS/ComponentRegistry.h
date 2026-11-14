@@ -6,7 +6,7 @@
 
 #include <unordered_map>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	// Forked: https://github.com/mtuncbilek95/Horizon/tree/pure-game-engine/Source/Engine/World/ECS
 	class ENGINE_API ComponentRegistry final
 	{

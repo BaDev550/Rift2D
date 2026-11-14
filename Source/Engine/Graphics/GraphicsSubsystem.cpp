@@ -11,7 +11,7 @@
 #include <queue>
 #include <imgui.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	Result GraphicsSubsystem::OnCreate(Engine* engine) {
 		Subsystem::OnCreate(engine);
 

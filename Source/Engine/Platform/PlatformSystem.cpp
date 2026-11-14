@@ -1,7 +1,7 @@
 #include "PlatformSystem.h"
 #include <Runtime/Memory/Allocator.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	PlatformSystem::PlatformSystem() {
 		_platformContext = Runtime::PAL::CreatePlatformContext();
 

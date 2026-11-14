@@ -1,7 +1,7 @@
 #include "EntityFactory.h"
 #include <Runtime/Definitions/Logger.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	EntityFactory::EntityFactory() {
 		_generations.resize(EstimatedEntities);
 		_signatures.resize(EstimatedEntities);

@@ -10,8 +10,8 @@ HEADER_EXTS = {".h", ".hpp", ".hh"}
 GENERATED_SUFFIX = ".generated.h"
 MANIFEST_NAME = "reflectManifest.h"
 MARKER = "// reflect: "
-CLASS_MACRO = "TCLASS"
-PROP_MACRO = "TPROP"
+CLASS_MACRO = "RCLASS"
+PROP_MACRO = "RPROP"
 
 _NOISE = re.compile(
     r"""//[^\n]*"""

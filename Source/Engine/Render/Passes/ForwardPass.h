@@ -7,8 +7,8 @@
 #include <Runtime/RHI/Pipeline/RHIPipeline.h>
 #include <Runtime/Math/Mat4.h>
 
-namespace Tourqe::Engine {
-	TCLASS();
+namespace Rift::Engine {
+	RCLASS();
 	class ENGINE_API ForwardRenderPass final : public RenderPass {
 		GENERATE_CLASS(ForwardRenderPass)
 	public:

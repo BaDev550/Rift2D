@@ -3,8 +3,8 @@
 #include <Runtime/Definitions/Types.h>
 #include <Runtime/Reflection/ReflectObject.h>
 
-namespace Tourqe::Engine {
-	TCLASS();
+namespace Rift::Engine {
+	RCLASS();
 	class BaseComponent : public Runtime::Reflection::ReflectObject {
 		GENERATE_CLASS(BaseComponent);
 	public:

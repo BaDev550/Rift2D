@@ -4,15 +4,15 @@
 #include <Runtime/Definitions/Types.h>
 #include <Runtime/Containers/UUID.h>
 
-namespace Tourqe::Engine {
-	TCLASS();
+namespace Rift::Engine {
+	RCLASS();
 	class IdenityComponent final : public BaseComponent {
 		GENERATE_CLASS(IdenityComponent)
 	public:
-		TPROP();
+		RPROP();
 		std::string name;
 
-		TPROP();
+		RPROP();
 		Runtime::UUID uuid;
 	};
 }

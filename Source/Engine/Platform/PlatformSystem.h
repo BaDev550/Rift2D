@@ -4,7 +4,7 @@
 #include <Engine/Subsystem/Subsystem.h>
 #include <Runtime/PAL/PlatformContext.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	class ENGINE_API PlatformSystem final {
 	public:
 		PlatformSystem();

@@ -5,7 +5,7 @@
 #include <Runtime/Containers/UUID.h>
 #include <Runtime/Definitions/Handle.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	class AssetStreamer;
 	class Asset;
 	using AssetHandle = Runtime::Handle<Asset>;
@@ -19,7 +19,7 @@ namespace Tourqe::Engine {
 		u64 dataSize = 0;
 	};
 
-	TCLASS();
+	RCLASS();
 	class Asset : public Runtime::Reflection::ReflectObject {
 		GENERATE_CLASS(Asset);
 	public:

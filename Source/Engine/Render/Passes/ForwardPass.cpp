@@ -6,13 +6,13 @@
 #include <Engine/Asset/Shader/Shader.h>
 #include <Runtime/Definitions/Profiler.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	void ForwardRenderPass::OnInitialize() {
 		auto assetSystem = GetEngine()->GetSubsystem<AssetSubsystem>();
 		auto* renderSystem = GetEngine()->GetSubsystem<GraphicsSubsystem>();
 		{
-			Shader* forwardPassVertexShader = assetSystem->Get<Shader>("2D_forward_vert.vert");
-			Shader* forwardPassFragmentShader = assetSystem->Get<Shader>("2D_forward_frag.frag");
+			Shader* forwardPassVertexShader = assetSystem->Get<Shader>("Shaders/2D_forward_vert.vert");
+			Shader* forwardPassFragmentShader = assetSystem->Get<Shader>("Shaders/2D_forward_frag.frag");
 
 			Runtime::RHI::PushConstantRange pcRange{};
 			pcRange.size = sizeof(SpritePushConstant);

@@ -3,7 +3,7 @@
 #include <Runtime/Memory/Allocator.h>
 #include <Runtime/Definitions/Logger.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	namespace {
 		static constexpr usize sInitialCapacity = 16;
 	}

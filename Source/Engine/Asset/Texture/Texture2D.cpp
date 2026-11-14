@@ -7,7 +7,7 @@
 #include <Runtime/RHI/Image/RHIImage.h>
 #include <Runtime/RHI/Context/RHIContext.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
     Texture2D::Texture2D(const Runtime::RHI::ImageDesc& desc) {
         auto* graphicsSubsystem = Engine::Get()->GetSubsystem<GraphicsSubsystem>();
         auto* rhi_context = graphicsSubsystem->GetContext();

@@ -4,7 +4,7 @@
 #include <Engine/Core/Engine.h>
 #include <Runtime/Containers/Result.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	class Scene;
 
 	class ENGINE_API System {

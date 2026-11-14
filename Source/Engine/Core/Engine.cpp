@@ -8,7 +8,7 @@
 
 #include <queue>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	void EngineTime::Update() { // TODO(0x): move this to another file
 		auto now = std::chrono::high_resolution_clock::now();
 		if (_lastTime.time_since_epoch().count() == 0) {

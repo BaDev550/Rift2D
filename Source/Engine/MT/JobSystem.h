@@ -10,7 +10,7 @@
 #include <vector>
 #include <Runtime/Definitions/Types.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	using JobFunc = std::function<void()>;
 
 	enum class JobPriority : u8 {

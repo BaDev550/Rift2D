@@ -3,7 +3,7 @@
 #include <vector>
 #include <Engine/Core/Core.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
     class ENGINE_API PluginSystem final {
     public:
         PluginSystem();

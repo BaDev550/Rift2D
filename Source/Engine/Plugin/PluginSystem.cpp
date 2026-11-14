@@ -7,7 +7,7 @@
 #include <windows.h>
 #endif
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	PluginSystem::PluginSystem() {
 
 	}

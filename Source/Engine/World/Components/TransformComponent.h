@@ -8,20 +8,20 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	using namespace Runtime;
 
-	TCLASS();
+	RCLASS();
 	class TransformComponent : public BaseComponent {
 		GENERATE_CLASS(TransformComponent);
 	public:
-		TPROP(Edit, Transient, Step=0.1f);
+		RPROP(Edit, Transient, Step=0.1f);
 		Math::Vec3 position = Math::Vec3(1.0f);
 
-		TPROP(Edit, Transient, Step = 0.1f);
+		RPROP(Edit, Transient, Step = 0.1f);
 		Math::Quat rotation = Math::Quat();
 
-		TPROP(Edit, Transient, Step = 0.1f);
+		RPROP(Edit, Transient, Step = 0.1f);
 		Math::Vec3 scale = Math::Vec3(1.0f);
 
 		Math::Mat4 world = Math::Mat4();

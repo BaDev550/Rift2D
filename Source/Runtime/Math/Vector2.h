@@ -4,7 +4,7 @@
 #include <Runtime/Reflection/Macros.h>
 
 namespace Runtime::Math {
-	TSTRUCT();
+	RSTRUCT();
 	struct Vec2 {
 		f32 x;
 		f32 y;

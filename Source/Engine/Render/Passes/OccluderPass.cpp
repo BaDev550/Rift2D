@@ -9,7 +9,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	void OccluderPass::OnInitialize() {
 		auto assetSystem = GetEngine()->GetSubsystem<AssetSubsystem>();
 		auto* renderSystem = GetEngine()->GetSubsystem<GraphicsSubsystem>();
@@ -25,8 +25,8 @@ namespace Tourqe::Engine {
 			occluderDesc.usage = Runtime::RHI::ImageUsage::ColorAttachment | Runtime::RHI::ImageUsage::Sampled;
 			_occluderImage = context->CreateImage(occluderDesc);
 
-			Shader* forwardPassVertexShader = assetSystem->Get<Shader>("2D_forward_vert.vert");
-			Shader* forwardPassFragmentShader = assetSystem->Get<Shader>("2D_forward_frag.frag");
+			Shader* forwardPassVertexShader = assetSystem->Get<Shader>("Shaders/2D_forward_vert.vert");
+			Shader* forwardPassFragmentShader = assetSystem->Get<Shader>("Shaders/2D_forward_frag.frag");
 
 			Runtime::RHI::PushConstantRange pcRange{};
 			pcRange.size = sizeof(SpritePushConstant);
@@ -61,8 +61,8 @@ namespace Tourqe::Engine {
 			shadowDesc.usage = Runtime::RHI::ImageUsage::ColorAttachment | Runtime::RHI::ImageUsage::Sampled;
 			_shadowMapAtlas = context->CreateImage(shadowDesc);
 
-			Shader* shadowVert = assetSystem->Get<Shader>("shadow_atlas_vert.vert");
-			Shader* shadowFrag = assetSystem->Get<Shader>("shadow_atlas_frag.frag");
+			Shader* shadowVert = assetSystem->Get<Shader>("Shaders/shadow_atlas_vert.vert");
+			Shader* shadowFrag = assetSystem->Get<Shader>("Shaders/shadow_atlas_frag.frag");
 
 			Runtime::RHI::PushConstantRange shadowPcRange{};
 			shadowPcRange.size = sizeof(ShadowMapPushConstant);

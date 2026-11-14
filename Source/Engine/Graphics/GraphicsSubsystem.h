@@ -17,7 +17,7 @@
 #include <Runtime/RHI/Command/RHICommandBufferDesc.h>
 #include <Runtime/RHI/Command/RHICommandPoolDesc.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	using namespace Runtime;
 	using CommandFunc = std::function<void(RHI::CommandBuffer* cmd)>;
 

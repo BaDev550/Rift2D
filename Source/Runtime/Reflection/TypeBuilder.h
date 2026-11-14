@@ -12,7 +12,7 @@ namespace Runtime::Reflection {
 			builder._type._type = typeid(T);
 			builder._type._size = sizeof(T);
 			builder._type._alignment = alignof(T);
-			builder._type._abstractClass = std::is_abstract_v<T>;
+			builder._type._abstracRCLASS = std::is_abstract_v<T>;
 
 			if constexpr (!std::is_abstract_v<T>) {
 				builder._type._destructFunc = [](void* mem) {

@@ -5,7 +5,7 @@
 #include <vector>
 #include <functional>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	class ENGINE_API ReflectionSystem final {
 	public:
 		ReflectionSystem();

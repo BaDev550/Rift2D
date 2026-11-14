@@ -7,7 +7,7 @@
 #include <array>
 
 namespace Runtime::Math {
-	TSTRUCT();
+	RSTRUCT();
 	struct Mat4 {
 		f32 m[16];
 

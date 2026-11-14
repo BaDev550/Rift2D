@@ -5,7 +5,7 @@
 #include <Engine/World/ECS/Scene.h>
 #include <Engine/World/System.h>
 
-namespace Tourqe::Engine { // All temp classes
+namespace Rift::Engine { // All temp classes
 	class ENGINE_API WorldSubsystem : public Subsystem {
 	public:
 		virtual Runtime::Result OnCreate(Engine* engine) override;

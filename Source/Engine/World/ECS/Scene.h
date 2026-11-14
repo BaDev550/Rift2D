@@ -7,7 +7,7 @@
 #include <Runtime/Containers/UUID.h>
 #include <unordered_map>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	class WorldSubsystem;
 	class ReflectionSystem;
 

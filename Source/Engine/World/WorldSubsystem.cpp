@@ -7,7 +7,7 @@
 #include <Engine/Graphics/GraphicsSubsystem.h>
 #include <Engine/MT/JobSystem.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	Runtime::Result WorldSubsystem::OnCreate(Engine* engine) {
 		Subsystem::OnCreate(engine);
 

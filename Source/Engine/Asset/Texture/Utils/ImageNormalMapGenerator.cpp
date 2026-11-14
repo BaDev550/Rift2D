@@ -8,12 +8,12 @@
 #include <Runtime/RHI/Shader/ShaderDesc.h>
 #include <Runtime/RHI/Image/RHIImage.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	ImageNormalMapGenerator::ImageNormalMapGenerator() {
 		auto assetSystem = Engine::Get()->GetSubsystem<AssetSubsystem>();
 		auto* renderSystem = Engine::Get()->GetSubsystem<GraphicsSubsystem>();
 		{
-			Shader* computeShader = assetSystem->Get<Shader>("2D_normalmap_generator.comp");
+			Shader* computeShader = assetSystem->Get<Shader>("Shaders/2D_normalmap_generator.comp");
 			
 			Runtime::RHI::PushConstantRange pcRange{};
 			pcRange.size = sizeof(SpriteComputePushData);

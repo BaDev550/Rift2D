@@ -5,7 +5,7 @@
 #include <Engine/World/ECS/EntityDefinitions.h>
 #include <Runtime/Reflection/Type.h>
 
-namespace Tourqe::Engine {
+namespace Rift::Engine {
 	// Forked: https://github.com/mtuncbilek95/Horizon/tree/pure-game-engine/Source/Engine/World/ECS
 	class ENGINE_API ComponentStorage final {
 	public:

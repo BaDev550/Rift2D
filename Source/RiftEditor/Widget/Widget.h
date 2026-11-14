@@ -1,0 +1,15 @@
+#pragma once
+
+#include <Engine/Core/Core.h>
+#include <Runtime/Reflection/ReflectObject.h>
+#include <Runtime/Reflection/Macros.h>
+
+RCLASS();
+class Widget : public Runtime::Reflection::ReflectObject {
+	GENERATE_CLASS(Widget);
+public:
+	virtual ~Widget() = default;
+
+	virtual int Order() const { return 0; }
+	virtual void Draw() = 0;
+};
