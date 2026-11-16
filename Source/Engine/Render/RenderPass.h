@@ -3,6 +3,7 @@
 #include <Engine/Core/Engine.h>
 #include <Runtime/Definitions/Types.h>
 #include <Runtime/Reflection/ReflectObject.h>
+#include <Runtime/RHI/Image/RHIImageLayout.h>
 #include <Engine/Render/RenderFrame.h>
 
 namespace Rift::Engine {
@@ -17,10 +18,12 @@ namespace Rift::Engine {
 	};
 
 	RCLASS();
-	class RenderPass : public Runtime::Reflection::ReflectObject {
+	class ENGINE_API RenderPass : public Runtime::Reflection::ReflectObject {
 		GENERATE_CLASS(RenderPass)
 	public:
 		virtual ~RenderPass() = default;
+
+		void Submit(const RenderFrame& frame);
 
 		virtual void OnInitialize() = 0;
 		virtual void OnDestroy() = 0;
@@ -34,6 +37,8 @@ namespace Rift::Engine {
 		Engine* GetEngine() const { return _engine; }
 	private:
 		Engine* _engine;
+		Runtime::RHI::ImageLayout _initalLayout = Runtime::RHI::ImageLayout::Undefined;
+		Runtime::RHI::ImageLayout _finalLayout = Runtime::RHI::ImageLayout::Undefined;
 		
 		friend class GraphicsSubsystem;
 	};

@@ -1,16 +1,19 @@
 #pragma once
 
 #include <Engine/Render/RenderItem.h>
+#include <Runtime/Definitions/Types.h>
 #include <array>
 
 namespace Rift::Engine {
 	enum class RenderQueue : u32 {
-		Opaque,
-		Transparent,
-		Sprite,
-		UI,
+		None = 0,
+		Opaque = BIT(0),
+		Transparent = BIT(1),
+		Sprite = BIT(2),
+		UI = BIT(3),
 		Count
 	};
+	CORE_DEFINE_ENUM_FLAG_OPERATORS(RenderQueue)
 
 	class RenderQueues {
 	public:

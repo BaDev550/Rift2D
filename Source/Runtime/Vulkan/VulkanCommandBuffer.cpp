@@ -33,8 +33,7 @@ namespace Runtime::RHI {
 		VulkanContext* vkContext = GetOwningRHIContext<VulkanContext>();
 
 		u32 colorAttachmentCount = static_cast<uint32_t>(info.colorAttachments.size());
-		b8 hasDepth = info.depthAttachment;
-
+		
 		std::vector<VkRenderingAttachmentInfo> colorAttachmentInfos(colorAttachmentCount);
 		for (uint32_t i = 0; i < colorAttachmentCount; i++) {
 			auto& attachmentInfo = colorAttachmentInfos[i];
@@ -53,19 +52,21 @@ namespace Runtime::RHI {
 					colorAttachment.clearColor.z, 
 					colorAttachment.clearColor.w
 				} };
-			vkContext->TransitionImageLayout(_commandBuffer, vkImage, ImageLayout::ColorAttachment);
+			vkContext->TransitionImageLayout(_commandBuffer, vkImage, colorAttachment.initalLayout);
 		}
 
 		VkRenderingAttachmentInfo depthAttachmentInfo{};
+		Attachment depthAttachment = info.depthAttachment;
+		b8 hasDepth = depthAttachment.image;
 		if (hasDepth) {
-			VulkanImage* vkDepthImage = static_cast<VulkanImage*>(info.depthAttachment);
+			VulkanImage* vkDepthImage = static_cast<VulkanImage*>(depthAttachment.image);
 			depthAttachmentInfo.sType = VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO;
 			depthAttachmentInfo.imageView = vkDepthImage->GetImageView();
-			depthAttachmentInfo.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
+			depthAttachmentInfo.loadOp = Utils::GetVkLoadOp(depthAttachment.loadOp);
 			depthAttachmentInfo.storeOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
 			depthAttachmentInfo.imageLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
 			depthAttachmentInfo.clearValue.depthStencil = { 1.0f, 0 };
-			vkContext->TransitionImageLayout(_commandBuffer, vkDepthImage, ImageLayout::DepthAttachment);
+			vkContext->TransitionImageLayout(_commandBuffer, vkDepthImage, depthAttachment.initalLayout);
 		}
 
 		VkRect2D renderArea{};
@@ -81,13 +82,13 @@ namespace Runtime::RHI {
 		renderInfo.pColorAttachments = colorAttachmentInfos.data();
 		renderInfo.pDepthAttachment = hasDepth ? &depthAttachmentInfo : nullptr;
 
-		if (debugInfo) {
+		if (info.debugInfo) {
 			VkDebugUtilsLabelEXT passLabel{};
 			passLabel.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT;
-			passLabel.pLabelName = debugInfo->label.c_str();
-			passLabel.color[0] = debugInfo->color.x;
-			passLabel.color[1] = debugInfo->color.y;
-			passLabel.color[2] = debugInfo->color.z;
+			passLabel.pLabelName = info.debugInfo->label.c_str();
+			passLabel.color[0] = info.debugInfo->color.x;
+			passLabel.color[1] = info.debugInfo->color.y;
+			passLabel.color[2] = info.debugInfo->color.z;
 			passLabel.color[3] = 1;
 
 			vkContext->BeginDebugLabel(_commandBuffer, &passLabel);
