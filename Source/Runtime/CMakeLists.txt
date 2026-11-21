@@ -1,5 +1,5 @@
 ﻿file(GLOB_RECURSE SOURCECODE CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/*.h") 
-add_library(Runtime STATIC ${SOURCECODE})
+add_library(Runtime SHARED ${SOURCECODE})
 
 find_package(imgui CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)

@@ -9,6 +9,8 @@ namespace Rift::Engine {
 	class ENGINE_API LightPass : public RenderPass { // TEMP PASS
 		GENERATE_CLASS(LightPass)
 	public:
+		virtual void OnInitialize() final {}
+		virtual void OnDestroy() final {}
 		virtual void Setup(RenderGraphBuilder& builder) final {}
 		virtual void Execute(const RenderFrame& frame, const RenderGraphResourceContainer& resources) final {}
 

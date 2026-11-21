@@ -1,0 +1,23 @@
+#pragma once
+#include <Engine/Core/Core.h>
+
+namespace RHI {
+	enum class GfxFormat : u8 {
+		Undefined = 0,
+		R16_UNORM,
+		RG8,
+		RGB8,
+		RGBA8,
+		RGBA8_UNORM,
+		RGBA16,
+		RGBA,
+
+		BC3,
+		BC5,
+		BC7,
+
+		D32_SFLOAT,
+		D16_UNORM,
+		D24_UNORM_S8_UINT
+	};
+}

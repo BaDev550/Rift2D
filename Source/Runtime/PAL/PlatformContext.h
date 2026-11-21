@@ -43,5 +43,6 @@ namespace Runtime::PAL{
 
 		virtual void* GetMainModuleSymbol(const char* symbolName) = 0; // TODO(0x): more modular
 	};
-	PlatformContext* CreatePlatformContext();
+
+	RUNTIME_API PlatformContext* CreatePlatformContext();
 }

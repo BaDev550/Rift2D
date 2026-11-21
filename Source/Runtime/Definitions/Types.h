@@ -36,3 +36,4 @@ using f64 = double;
 inline constexpr u8 u8_max = std::numeric_limits<u8>::max();
 inline constexpr u16 u16_max = std::numeric_limits<u16>::max();
 inline constexpr u32 u32_max = std::numeric_limits<u32>::max();
+inline constexpr usize size_max = std::numeric_limits<usize>::max();
