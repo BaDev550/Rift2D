@@ -125,20 +125,6 @@ namespace Rift::Engine {
 		std::vector<CommandFunc> pending;
 		if (!cmd) return;
 
-		auto* backbuffer = GetSwapchain()->GetColorAttachments()[_imageIndex];
-		auto* depthbuffer = GetSwapchain()->GetDepthAttachment();
-		glm::vec2 extent = GetSwapchain()->GetExtent();
-		cmd->TransitionImageLayout(backbuffer, RHI::ImageLayout::ColorAttachment);
-		cmd->TransitionImageLayout(depthbuffer, RHI::ImageLayout::DepthAttachment);
-		RHI::RenderingSubmitInfo submit{};
-		submit.colorAttachments = { backbuffer };
-		submit.depthAttachment = depthbuffer;
-		submit.extent = extent;
-		cmd->BeginDynamicRendering(submit);
-
-		cmd->EndDynamicRendering();
-		cmd->TransitionImageLayout(backbuffer, RHI::ImageLayout::PresentSrc);
-
 		pending.swap(_commandQueue);
 		for (auto& command : pending) { command(cmd); }
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Runtime/Definitions/Types.h>
+#include <nlohmann/json.hpp>
 #include <iostream>
 #include <sstream>
 

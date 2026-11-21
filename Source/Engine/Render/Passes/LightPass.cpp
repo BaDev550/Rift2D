@@ -9,6 +9,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Rift::Engine {
+#if 0
 	void LightPass::OnInitialize() {
 		auto* assetSystem = GetEngine()->GetSubsystem<AssetSubsystem>();
 		auto* renderSystem = GetEngine()->GetSubsystem<GraphicsSubsystem>();
@@ -86,4 +87,5 @@ namespace Rift::Engine {
 			frame.cmd->TransitionImageLayout(frame.color, Runtime::RHI::ImageLayout::ShaderReadOnly);
 		}
 	}
+#endif
 }

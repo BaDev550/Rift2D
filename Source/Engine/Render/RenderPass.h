@@ -5,9 +5,12 @@
 #include <Runtime/Reflection/ReflectObject.h>
 #include <Runtime/RHI/Image/RHIImageLayout.h>
 #include <Engine/Render/RenderFrame.h>
+#include <Engine/Render/RenderQueue.h>
+#include <Engine/Render/RenderGraphBuilder.h>
 
 namespace Rift::Engine {
 	class GraphicsSubsystem;
+	class RenderGraphResourceContainer;
 
 	enum class RenderStage : i32 {
 		PreScene = 0,
@@ -18,16 +21,15 @@ namespace Rift::Engine {
 	};
 
 	RCLASS();
-	class ENGINE_API RenderPass : public Runtime::Reflection::ReflectObject {
+	class RenderPass : public Runtime::Reflection::ReflectObject {
 		GENERATE_CLASS(RenderPass)
 	public:
 		virtual ~RenderPass() = default;
 
-		void Submit(const RenderFrame& frame);
-
 		virtual void OnInitialize() = 0;
 		virtual void OnDestroy() = 0;
-		virtual void Execute(const RenderFrame& frame) = 0;
+		virtual void Setup(RenderGraphBuilder& builder) = 0;
+		virtual void Execute(const RenderFrame& frame, const RenderGraphResourceContainer& resources) = 0;
 
 		virtual i32 GetOrder() const { return 0; }
 		virtual RenderStage GetStage() const { return RenderStage::Scene; }
@@ -37,9 +39,10 @@ namespace Rift::Engine {
 		Engine* GetEngine() const { return _engine; }
 	private:
 		Engine* _engine;
-		Runtime::RHI::ImageLayout _initalLayout = Runtime::RHI::ImageLayout::Undefined;
-		Runtime::RHI::ImageLayout _finalLayout = Runtime::RHI::ImageLayout::Undefined;
-		
+
+		i32 GetShortingValue() const { return (GetOrder() + static_cast<i32>(GetStage())); }
+
+		friend class RenderGraph;
 		friend class GraphicsSubsystem;
 	};
 }

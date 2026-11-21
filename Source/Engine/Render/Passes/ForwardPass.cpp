@@ -7,9 +7,25 @@
 #include <Runtime/Definitions/Profiler.h>
 
 namespace Rift::Engine {
+
 	void ForwardRenderPass::OnInitialize() {
 		auto assetSystem = GetEngine()->GetSubsystem<AssetSubsystem>();
 		auto* renderSystem = GetEngine()->GetSubsystem<GraphicsSubsystem>();
+		{
+			Runtime::RHI::ImageDesc colorDesc{};
+			colorDesc.width = renderSystem->GetSwapchain()->GetExtent().x;
+			colorDesc.height = renderSystem->GetSwapchain()->GetExtent().y;
+			colorDesc.format = Runtime::RHI::Format::RGBA8;
+			colorDesc.usage = Runtime::RHI::ImageUsage::ColorAttachment;
+			_color = renderSystem->GetContext()->CreateImage(colorDesc);
+
+			Runtime::RHI::ImageDesc depthDesc{};
+			depthDesc.width = renderSystem->GetSwapchain()->GetExtent().x;
+			depthDesc.height = renderSystem->GetSwapchain()->GetExtent().y;
+			depthDesc.format = Runtime::RHI::Format::D32_SFLOAT;
+			depthDesc.usage = Runtime::RHI::ImageUsage::DepthStencilAttachment;
+			_depth = renderSystem->GetContext()->CreateImage(depthDesc);
+		}
 		{
 			Shader* forwardPassVertexShader = assetSystem->Get<Shader>("Shaders/2D_forward_vert.vert");
 			Shader* forwardPassFragmentShader = assetSystem->Get<Shader>("Shaders/2D_forward_frag.frag");
@@ -28,7 +44,8 @@ namespace Rift::Engine {
 			vertexDesc.depthTest = false;
 
 			_forwardPassPipeline = renderSystem->GetContext()->CreatePipeline(vertexDesc);
-
+		}
+		{
 			Runtime::RHI::BufferDesc sbDesc{};
 			sbDesc.size = sizeof(SpriteData) * MaxSprites;
 			sbDesc.usage = Runtime::RHI::BufferUsage::Storage | Runtime::RHI::BufferUsage::DeviceAddress;
@@ -38,35 +55,39 @@ namespace Rift::Engine {
 		}
 	}
 
-	void ForwardRenderPass::OnDestroy() {
-		Runtime::Mem::Allocator::Destroy(_spriteDataStorageBuffer);
-		Runtime::Mem::Allocator::Destroy(_forwardPassPipeline);
+	void ForwardRenderPass::Setup(RenderGraphBuilder& builder) {
+		ResourceHandle forwardColorHandle = builder.Import("ForwardColor", _color);
+		ResourceHandle forwardDepthHandle = builder.Import("ForwardDepth", _depth);
+		builder.Write(forwardColorHandle, Runtime::RHI::ImageLayout::ColorAttachment);
+		builder.Write(forwardDepthHandle, Runtime::RHI::ImageLayout::DepthAttachment);
 	}
 
-	void ForwardRenderPass::Execute(const RenderFrame& frame) {
+	void ForwardRenderPass::Execute(const RenderFrame& frame, const RenderGraphResourceContainer& resources) {
 		auto* renderSystem = GetEngine()->GetSubsystem<GraphicsSubsystem>();
 
 		{
 			BEGIN_PROFILE_SCOPE("ForwardPass");
 
-			Runtime::RHI::ColorAttachment attachment{};
-			attachment.image = frame.color;
-			attachment.loadOp = Runtime::RHI::ImageLoadOp::Load;
-			attachment.clearColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+			Runtime::RHI::Attachment colorAttachment{};
+			colorAttachment.image = _color;
+			colorAttachment.loadOp = Runtime::RHI::ImageLoadOp::Load;
+			colorAttachment.clearColor = Runtime::Math::Vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
-			frame.cmd->TransitionImageLayout(frame.color, Runtime::RHI::ImageLayout::ColorAttachment);
-			frame.cmd->TransitionImageLayout(frame.depth, Runtime::RHI::ImageLayout::DepthAttachment);
-
-			Runtime::RHI::RenderingSubmitInfo info{};
-			info.colorAttachments = { attachment };
-			info.depthAttachment = frame.depth;
-			info.extent = frame.extent;
+			Runtime::RHI::Attachment depthAttachment{};
+			colorAttachment.image = _depth;
+			colorAttachment.loadOp = Runtime::RHI::ImageLoadOp::Clear;
 
 			Runtime::RHI::PassDebugInfo debug{};
 			debug.label = "ForwardPass";
-			debug.color = glm::vec3(1.0f, 0.0f, 0.0f);
+			debug.color = Runtime::Math::Vec3(1.0f, 0.0f, 0.0f);
 
-			frame.cmd->BeginDynamicRendering(info, &debug);
+			Runtime::RHI::RenderingSubmitInfo info{};
+			info.colorAttachments = { colorAttachment };
+			info.depthAttachment = depthAttachment;
+			info.extent = frame.extent;
+			info.debugInfo = &debug;
+
+			frame.cmd->BeginDynamicRendering(info);
 			frame.cmd->BindPipeline(_forwardPassPipeline);
 
 			auto* bindlessSet = renderSystem->GetContext()->GetBindlessDescriptorSet();
@@ -106,5 +127,10 @@ namespace Rift::Engine {
 			}
 			frame.cmd->EndDynamicRendering();
 		}
+	}
+
+	void ForwardRenderPass::OnDestroy() {
+		Runtime::Mem::Allocator::Destroy(_spriteDataStorageBuffer);
+		Runtime::Mem::Allocator::Destroy(_forwardPassPipeline);
 	}
 }

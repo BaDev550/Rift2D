@@ -10,6 +10,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Rift::Engine {
+#if 0
 	void OccluderPass::OnInitialize() {
 		auto assetSystem = GetEngine()->GetSubsystem<AssetSubsystem>();
 		auto* renderSystem = GetEngine()->GetSubsystem<GraphicsSubsystem>();
@@ -90,6 +91,7 @@ namespace Rift::Engine {
 
 	void OccluderPass::Execute(const RenderFrame& frame) {
 		auto* renderSystem = GetEngine()->GetSubsystem<GraphicsSubsystem>();
+#if 0
 		auto bindlessSet = renderSystem->GetContext()->GetBindlessDescriptorSet();
 		auto globalSet = renderSystem->GetContext()->GetGlobalDescriptorSet();
 		if (_lightCount == 0 || _lightBDA == 0) return;
@@ -182,7 +184,9 @@ namespace Rift::Engine {
 
 			frame.cmd->TransitionImageLayout(_shadowMapAtlas, Runtime::RHI::ImageLayout::ShaderReadOnly);
 		}
+#endif
 	}
+#endif
 
 	void OccluderPass::SetLightData(u64 lightBDA, u32 lightCount) {
 		_lightBDA = lightBDA;

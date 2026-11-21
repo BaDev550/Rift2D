@@ -2,7 +2,7 @@
 #include <Engine/Core/Core.h>
 
 namespace Runtime::RHI {
-	enum class ImageUsage : u8 {
+	enum class ImageUsage : u16 {
 		None = 0,
 		Sampled = BIT(0),
 		Storage = BIT(1),

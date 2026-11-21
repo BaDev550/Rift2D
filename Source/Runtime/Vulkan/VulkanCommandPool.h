@@ -3,6 +3,7 @@
 #include <Runtime/RHI/Command/RHICommandPool.h>
 #include <Runtime/RHI/Command/RHICommandPoolDesc.h>
 #include <Runtime/Vulkan/VulkanCommandBuffer.h>
+#include <list>
 
 #include <vulkan/vulkan.h>
 

@@ -18,9 +18,8 @@ namespace Rift::Engine {
 		static constexpr u32 LightMapResolution = 1024;
 		static constexpr u32 MaxLights = 128;
 
-		virtual void OnInitialize() final;
-		virtual void OnDestroy() final;
-		virtual void Execute(const RenderFrame& frame) final;
+		virtual void Setup(RenderGraphBuilder& builder) final {};
+		virtual void Execute(const RenderFrame& frame, const RenderGraphResourceContainer& resources) final {};
 
 		u32 GetShadowMapTextureID() const { return _shadowMapAtlas->GetBindlessIndex(); }
 		u32 GetShadowMapSamplerID() const { return _shadowMapAtlas->GetSamplerIndex(); }

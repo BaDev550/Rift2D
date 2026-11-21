@@ -24,15 +24,12 @@ namespace Rift::Engine {
 
 		_forwardRenderPass = Runtime::Mem::Allocator::Construct<ForwardRenderPass>();
 		_forwardRenderPass->SetEngine(_engine);
-		_forwardRenderPass->OnInitialize();
 
 		_occluderPass = Runtime::Mem::Allocator::Construct<OccluderPass>();
 		_occluderPass->SetEngine(_engine);
-		_occluderPass->OnInitialize();
 
 		_lightPass = Runtime::Mem::Allocator::Construct<LightPass>(); // TODO(0x):RTTR
 		_lightPass->SetEngine(_engine);
-		_lightPass->OnInitialize();
 
 		Runtime::RHI::BufferDesc desc{};
 		desc.size = sizeof(SpriteVertices);
@@ -67,6 +64,7 @@ namespace Rift::Engine {
 	void SceneRenderer2DSystem::OnUpdate(Scene& scene) {
 		auto system = _engine->GetSubsystem<GraphicsSubsystem>();
 
+#if 0
 		system->Submit([this, &scene](Runtime::RHI::CommandBuffer* cmd) {
 			auto assetSystem = _engine->GetSubsystem<AssetSubsystem>();
 			auto renderSystem = _engine->GetSubsystem<GraphicsSubsystem>();
@@ -161,21 +159,16 @@ namespace Rift::Engine {
 				if (offscreen) cmd->TransitionImageLayout(_viewportColor, Runtime::RHI::ImageLayout::ShaderReadOnly);
 			}
 			});
+#endif
 	}
 
 	void SceneRenderer2DSystem::OnDestroy() {
 		auto renderSystem = _engine->GetSubsystem<GraphicsSubsystem>();
 		renderSystem->GetContext()->WaitDeviceIdle();
 
-		_forwardRenderPass->OnDestroy();
-		_lightPass->OnDestroy();
-		_occluderPass->OnDestroy();
 		Mem::Allocator::Destroy(_lightPass);
 		Mem::Allocator::Destroy(_occluderPass);
 		Mem::Allocator::Destroy(_forwardRenderPass);
-
-		RetireOffscreen();
-		CollectRetired(renderSystem, true);
 
 		for (auto& fdb : _frameDataBuffers) {
 			Runtime::Mem::Allocator::Destroy(fdb);
@@ -186,92 +179,5 @@ namespace Rift::Engine {
 		}
 
 		Mem::Allocator::Destroy(_spriteBuffer);
-	}
-
-	bool SceneRenderer2DSystem::BeginOffscreen(GraphicsSubsystem* gfx, Runtime::RHI::CommandBuffer* cmd) {
-		_offscreenFrame++;
-		CollectRetired(gfx, false);
-
-		if (!_viewportActive) return false;
-		_viewportActive = false;
-
-		const u32 w = std::max(_viewportRequestW, 1u);
-		const u32 h = std::max(_viewportRequestH, 1u);
-
-		if (!_viewportColor || w != _viewportWidth || h != _viewportHeight) {
-			RetireOffscreen();
-			CreateOffscreen(gfx, w, h);
-		}
-
-		cmd->TransitionImageLayout(_viewportColor, Runtime::RHI::ImageLayout::ColorAttachment);
-		cmd->TransitionImageLayout(_viewportDepth, Runtime::RHI::ImageLayout::DepthAttachment);
-
-		Runtime::RHI::ColorAttachment color{};
-		color.image = _viewportColor;
-		color.clearColor = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
-
-		Runtime::RHI::RenderingSubmitInfo clear{};
-		clear.colorAttachments = { color };
-		clear.depthAttachment = _viewportDepth;
-		clear.extent = glm::vec2(static_cast<f32>(_viewportWidth), static_cast<f32>(_viewportHeight));
-		cmd->BeginDynamicRendering(clear);
-		cmd->EndDynamicRendering();
-
-		return true;
-	}
-
-	void SceneRenderer2DSystem::CreateOffscreen(GraphicsSubsystem* gfx, u32 width, u32 height) {
-		auto* context = gfx->GetContext();
-		auto* swapchain = gfx->GetSwapchain();
-
-		Runtime::RHI::ImageDesc colorDesc{};
-		colorDesc.width = width;
-		colorDesc.height = height;
-		colorDesc.format = swapchain->GetColorFormat();
-		colorDesc.usage = Runtime::RHI::ImageUsage::ColorAttachment | Runtime::RHI::ImageUsage::Sampled;
-		colorDesc.view.type = Runtime::RHI::ImageViewType::Image2D;
-		colorDesc.tileMode = Runtime::RHI::ImageTileMode::Optimal;
-		colorDesc.sampler = Runtime::RHI::StaticSampler::LinearClamp;
-		_viewportColor = context->CreateImage(colorDesc);
-
-		Runtime::RHI::ImageDesc depthDesc = colorDesc;
-		depthDesc.format = swapchain->GetDepthAttachment()->GetFormat();
-		depthDesc.usage = Runtime::RHI::ImageUsage::DepthStencilAttachment;
-		_viewportDepth = context->CreateImage(depthDesc);
-
-		_viewportWidth = width;
-		_viewportHeight = height;
-		_viewportTexture = gfx->GetImGuiContext()->AddTexture(_viewportColor);
-	}
-
-	void SceneRenderer2DSystem::RetireOffscreen() {
-		if (!_viewportColor) return;
-
-		RetiredTarget r{};
-		r.color = _viewportColor;
-		r.depth = _viewportDepth;
-		r.texture = _viewportTexture;
-		r.frame = _offscreenFrame;
-		_retiredTargets.push_back(r);
-
-		_viewportColor = nullptr;
-		_viewportDepth = nullptr;
-		_viewportTexture = ImTextureID_Invalid;
-		_viewportWidth = _viewportHeight = 0;
-	}
-
-	void SceneRenderer2DSystem::CollectRetired(GraphicsSubsystem* gfx, bool force) {
-		const u64 delay = GraphicsSubsystem::MaxFramesInFlight + 1;
-		for (auto it = _retiredTargets.begin(); it != _retiredTargets.end();) {
-			if (force || _offscreenFrame >= it->frame + delay) {
-				gfx->GetImGuiContext()->RemoveTexture(it->texture);
-				Runtime::Mem::Allocator::Destroy(it->color);
-				Runtime::Mem::Allocator::Destroy(it->depth);
-				it = _retiredTargets.erase(it);
-			}
-			else {
-				++it;
-			}
-		}
 	}
 }

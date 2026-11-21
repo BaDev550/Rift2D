@@ -29,7 +29,7 @@ namespace Runtime::RHI {
 		vkResetCommandBuffer(_commandBuffer, VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT);
 	}
 
-	void VulkanCommandBuffer::BeginDynamicRendering(const RenderingSubmitInfo& info, PassDebugInfo* debugInfo) {
+	void VulkanCommandBuffer::BeginDynamicRendering(const RenderingSubmitInfo& info) {
 		VulkanContext* vkContext = GetOwningRHIContext<VulkanContext>();
 
 		u32 colorAttachmentCount = static_cast<uint32_t>(info.colorAttachments.size());
@@ -52,7 +52,6 @@ namespace Runtime::RHI {
 					colorAttachment.clearColor.z, 
 					colorAttachment.clearColor.w
 				} };
-			vkContext->TransitionImageLayout(_commandBuffer, vkImage, colorAttachment.initalLayout);
 		}
 
 		VkRenderingAttachmentInfo depthAttachmentInfo{};
@@ -66,7 +65,6 @@ namespace Runtime::RHI {
 			depthAttachmentInfo.storeOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
 			depthAttachmentInfo.imageLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
 			depthAttachmentInfo.clearValue.depthStencil = { 1.0f, 0 };
-			vkContext->TransitionImageLayout(_commandBuffer, vkDepthImage, depthAttachment.initalLayout);
 		}
 
 		VkRect2D renderArea{};
@@ -95,7 +93,7 @@ namespace Runtime::RHI {
 			_debugPassAttached = true;
 		}
 		else {
-			_debugPassAttached = false;
+			_debugPassAttached = false; // fix
 		}
 		vkCmdBeginRendering(_commandBuffer, &renderInfo);
 

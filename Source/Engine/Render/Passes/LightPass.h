@@ -9,9 +9,8 @@ namespace Rift::Engine {
 	class ENGINE_API LightPass : public RenderPass { // TEMP PASS
 		GENERATE_CLASS(LightPass)
 	public:
-		void OnInitialize() override;
-		void OnDestroy() override;
-		void Execute(const RenderFrame& frame) override;
+		virtual void Setup(RenderGraphBuilder& builder) final {}
+		virtual void Execute(const RenderFrame& frame, const RenderGraphResourceContainer& resources) final {}
 
 		void SetResolution(f32 res) { _resolution = res; }
 		void SetShadowMap(Runtime::RHI::Image* image) { _shadowMapAtlas = image; }

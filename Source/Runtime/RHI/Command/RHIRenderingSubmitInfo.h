@@ -18,9 +18,7 @@ namespace Runtime::RHI {
 		Image* image = nullptr;
 		ImageLoadOp loadOp = ImageLoadOp::Clear;
 		Runtime::Math::Vec4 clearColor = Runtime::Math::Vec4(1.0f);
-		Runtime::RHI::ImageLayout initalLayout = Runtime::RHI::ImageLayout::Undefined;
-		Runtime::RHI::ImageLayout finalLayout = Runtime::RHI::ImageLayout::Undefined;
-
+		
 		Attachment() = default;
 		Attachment(Image* img, const Runtime::Math::Vec4& clearCol = Runtime::Math::Vec4(1.0f)) : image(img), clearColor(clearCol) {}
 	};
