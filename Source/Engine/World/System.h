@@ -2,7 +2,7 @@
 
 #include <Engine/Core/Core.h>
 #include <Engine/Core/Engine.h>
-#include <Runtime/Containers/Result.h>
+#include <Core/Result.h>
 
 namespace Rift::Engine {
 	class Scene;

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Runtime/Reflection/PropertyFlags.h>
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 #include <unordered_map>
 #include <typeindex>
 

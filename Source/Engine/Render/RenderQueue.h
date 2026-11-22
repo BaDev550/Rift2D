@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Engine/Render/RenderItem.h>
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 #include <array>
 
 namespace Rift::Engine {

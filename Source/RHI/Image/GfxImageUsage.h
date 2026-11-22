@@ -1,8 +1,9 @@
 #pragma once
-#include <Engine/Core/Core.h>
+#include <Core/Types.h>
+#include <Runtime/Definitions/Flags.h>
 
 namespace RHI {
-	enum class ImageUsage : u16 {
+	enum class GfxImageUsageBit : u16 {
 		None = 0,
 		Sampled = BIT(0),
 		Storage = BIT(1),
@@ -11,5 +12,5 @@ namespace RHI {
 		TransferSrc = BIT(4),
 		TransferDst = BIT(5)
 	};
-	CORE_DEFINE_ENUM_FLAG_OPERATORS(ImageUsage);
+	using GfxImageUsageFlags = Flags<GfxImageUsageBit>;
 }

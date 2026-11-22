@@ -13,7 +13,7 @@
 #include <Runtime/RHI/Buffer/RHIBuffer.h>
 #include <Runtime/RHI/Image/RHIImage.h>
 #include <Runtime/RHI/Common/RHIUtils.h>
-#include <Runtime/Definitions/Profiler.h>
+#include <Runtime/Debug/Profiler.h>
 #include <Engine/Asset/Texture/Texture2DImportSettings.h>
 
 #include <Runtime/IO/Path.h>

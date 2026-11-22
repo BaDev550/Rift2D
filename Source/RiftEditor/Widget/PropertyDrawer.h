@@ -9,7 +9,7 @@
 #include <Engine/World/Components/TransformComponent.h>
 #include <Engine/World/Components/SpriteComponent.h>
 #include <Engine/World/Components/IdenityComponent.h>
-#include <Runtime/Definitions/Profiler.h>
+#include <Runtime/Debug/Profiler.h>
 #include <Runtime/Reflection/Type.h>
 #include <Runtime/Reflection/Property.h>
 

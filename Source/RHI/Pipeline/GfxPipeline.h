@@ -6,11 +6,11 @@
 namespace RHI {
 	class CommandBuffer;
 
-	class Pipeline : public Object {
+	class GfxPipeline : public GfxObject {
 	public:
-		using Object::Object;
-		virtual ~Pipeline() = default;
+		using GfxObject::GfxObject;
+		virtual ~GfxPipeline() = default;
 
-		[[nodiscard]] virtual const PipelineDesc& GetDesc() const = 0;
+		[[nodiscard]] virtual const GfxPipelineDesc& GetDesc() const = 0;
 	};
 }

@@ -1,7 +1,6 @@
 #pragma once
 
-#include <Engine/Core/Core.h>
-#include <Runtime/Containers/Result.h>
+#include <Core/Result.h>
 #include <RHI/Object/GfxObject.h>
 #include <RHI/Common/GfxFormat.h>
 #include <RHI/Swapchain/GfxSwapchainDesc.h>
@@ -9,27 +8,27 @@
 #include <glm/glm.hpp>
 
 namespace RHI {
-	class Image;
-	class Fence;
+	class GfxImage;
+	class GfxFence;
 
-	class Swapchain : public Object {
+	class GfxSwapchain : public GfxObject {
 	public:
-		using Object::Object;
-		virtual ~Swapchain() = default;
+		using GfxObject::GfxObject;
+		virtual ~GfxSwapchain() = default;
 
-		virtual void Recreate(const SwapchainDesc& desc) = 0;
+		virtual void Recreate(const GfxSwapchainDesc& desc) = 0;
 		virtual void Recreate(u32 width, u32 height) = 0;
 		virtual void Destroy() = 0;
-		virtual Result AcquireNextImage(u32& imageIndex, Fence* imageAvailableFence) = 0;
+		virtual Result AcquireNextImage(u32& imageIndex, GfxFence* imageAvailableFence) = 0;
 
 		virtual [[nodiscard]] glm::vec2 GetExtent() const = 0;
 		virtual [[nodiscard]] u32 GetImageCount() const = 0;
 
-		virtual [[nodiscard]] std::vector<Image*>& GetColorAttachments() = 0;
-		virtual [[nodiscard]] Image* GetDepthAttachment() = 0;
+		virtual [[nodiscard]] std::vector<GfxImage*>& GetColorAttachments() = 0;
+		virtual [[nodiscard]] GfxImage* GetDepthAttachment() = 0;
 
-		virtual [[nodiscard]] const Format GetColorFormat() const = 0;
-		virtual [[nodiscard]] const Format GetDepthFormat() const = 0;
-		virtual [[nodiscard]] const SwapchainDesc& GetDesc() const = 0;
+		virtual [[nodiscard]] const GfxFormat GetColorFormat() const = 0;
+		virtual [[nodiscard]] const GfxFormat GetDepthFormat() const = 0;
+		virtual [[nodiscard]] const GfxSwapchainDesc& GetDesc() const = 0;
 	};
 }

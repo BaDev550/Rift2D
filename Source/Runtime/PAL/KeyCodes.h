@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 
 namespace Runtime {
 	enum class KeyCode : u16 {

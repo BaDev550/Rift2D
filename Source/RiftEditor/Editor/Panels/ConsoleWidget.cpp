@@ -1,5 +1,5 @@
 #include "ConsoleWidget.h"
-#include <Runtime/Definitions/Logger.h>
+#include <Runtime/Debug/Logger.h>
 #include <imgui.h>
 
 void ConsolleWidget::OnGUI() {

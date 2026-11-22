@@ -1,13 +1,10 @@
 {
   "builtin-baseline": "89dd0f4d241136b843fb55813b2f0fa6448c204d",
   "dependencies": [
-    "glm",
-    "glslang",
     "shaderc",
     "spirv-tools",
     "vulkan-headers",
     "vulkan-memory-allocator",
-    "glad",
     {
       "name": "imgui",
       "version>=": "1.92.9",
@@ -20,7 +17,6 @@
     "stb",
     "nvtt",
     "mio",
-    "nlohmann-json",
-    "entt"
+    "nlohmann-json"
   ]
 }

@@ -8,7 +8,7 @@
 #include <queue>
 #include <thread>
 #include <vector>
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 
 namespace Rift::Engine {
 	using JobFunc = std::function<void()>;

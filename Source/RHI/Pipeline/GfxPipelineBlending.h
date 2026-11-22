@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 
 namespace RHI {
-	enum class Blending : u8 {
+	enum class GfxBlending : u8 {
 		Enabled = 0,
 		Disabled
 	};

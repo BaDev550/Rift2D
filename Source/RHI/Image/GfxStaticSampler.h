@@ -3,7 +3,7 @@
 #include <Engine/Core/Core.h>
 
 namespace RHI {
-	enum class StaticSampler : u8 {
+	enum class GfxStaticSampler : u8 {
 		PointClamp = 0,
 		PointWrap,
 		LinearClamp,

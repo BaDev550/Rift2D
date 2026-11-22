@@ -1,5 +1,5 @@
 #include "SceneRenderer2D.h"
-#include <Runtime/Definitions/Profiler.h>
+#include <Runtime/Debug/Profiler.h>
 #include <Runtime/Memory/Allocator.h>
 
 #include <Engine/Asset/AssetSubsystem.h>

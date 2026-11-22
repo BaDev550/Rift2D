@@ -6,14 +6,14 @@
 #include <list>
 
 namespace RHI {
-	class DescriptorHeap : public Object {
+	class GfxDescriptorHeap : public Object {
 	public:
 		using Object::Object;
 		virtual ~DescriptorHeap() = default;
 
-		virtual DescriptorSet* AllocDescriptorSet(const DescriptorSetAllocInfo& allocInfo) = 0;
+		virtual GfxDescriptorSet* AllocDescriptorSet(const GfxDescriptorSetAllocInfo& allocInfo) = 0;
 		
-		[[nodiscard]] virtual std::vector<DescriptorSet*>& GetDescriptorSets() noexcept = 0;
-		[[nodiscard]] virtual const DescriptorHeapDesc& GetDesc() const noexcept = 0;
+		[[nodiscard]] virtual std::vector<GfxDescriptorSet*>& GetDescriptorSets() noexcept = 0;
+		[[nodiscard]] virtual const GfxDescriptorHeapDesc& GetDesc() const noexcept = 0;
 	};
 }

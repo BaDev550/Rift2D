@@ -3,19 +3,18 @@
 #include <RHI/Object/GfxObject.h>
 
 namespace RHI {
-	class CommandBuffer;
-	class Swapchain;
-	class Fence;
+	class GfxCommandBuffer;
+	class GfxSwapchain;
+	class GfxFence;
 
-	class Queue : public Object {
+	class GfxQueue : public GfxObject {
 	public:
-		using Object::Object;
-
-		virtual ~Queue() = default;
+		using GfxObject::GfxObject;
+		virtual ~GfxQueue() = default;
 
 		virtual void Wait() = 0;
-		virtual void Submit(CommandBuffer* commandBuffer, const std::vector<Fence*>& waitFences, const std::vector<Fence*>& signalFences) = 0;
-		virtual void Present(Swapchain* swapchain, u32 imageIndex, const std::vector<Fence*>& waitFences) = 0;
+		virtual void Submit(GfxCommandBuffer* commandBuffer, const std::vector<GfxFence*>& waitFences, const std::vector<GfxFence*>& signalFences) = 0;
+		virtual void Present(GfxSwapchain* swapchain, u32 imageIndex, const std::vector<GfxFence*>& waitFences) = 0;
 
 		[[nodiscard]] virtual u32 GetQueueFamilyIndex() const = 0;
 	};

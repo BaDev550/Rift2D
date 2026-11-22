@@ -1,22 +1,22 @@
 #pragma once
-#include <Runtime/Definitions/Logger.h>
+#include <string>
 #include <string_view>
 
 namespace RHI {
-	class Context;
+	class GfxContext;
 
-	class Object {
+	class GfxObject {
 	public:
-		Object(Context* context) : _context(context) {}
-		virtual ~Object() = default;
+		GfxObject(Context* context) : _context(context) {}
+		virtual ~GfxObject() = default;
 
-		virtual void SetObjectDebugName(const char* name) { _debugName = name; }
-		std::string_view GetObjectDebugName() const { return _debugName; }
+		virtual void SetObjectDebugName(std::string_view name) { _debugName = name; }
+		[[nodiscard]] const std::string& GetObjectDebugName() const { return _debugName; }
 	protected:
 		template<class T = Context> requires std::is_base_of_v<Context, T>
 		inline T* GetOwningRHIContext() { return static_cast<T*>(_context); }
 
-		Context* _context = nullptr;
-		std::string_view _debugName = "";
+		GfxContext* _context = nullptr;
+		std::string _debugName = "";
 	};
 }

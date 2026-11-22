@@ -1,9 +1,9 @@
 #pragma once 
 
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 
 namespace RHI {
-	enum class CompareOp : u8 {
+	enum class GfxCompareOp : u8 {
 		Equal,
 		NotEqual,
 		Greater,
@@ -11,7 +11,7 @@ namespace RHI {
 		Trigger
 	};
 
-	enum class DepthTest : u8 {
+	enum class GfxDepthTest : u8 {
 		Enabled = 0,
 		Disabled
 	};

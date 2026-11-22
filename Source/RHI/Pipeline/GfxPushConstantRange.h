@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 
 namespace RHI {
-	struct PushConstantRange {
+	struct GfxPushConstantRange {
 		usize size;
 		usize offset;
 	};

@@ -11,7 +11,7 @@
 
 #include <Engine/World/WorldSubsystem.h>
 #include <Runtime/Memory/Allocator.h>
-#include <Runtime/Definitions/Profiler.h>
+#include <Runtime/Debug/Profiler.h>
 
 #include <imgui.h>
 

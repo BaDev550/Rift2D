@@ -1,8 +1,9 @@
 #pragma once
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
+#include <Runtime/Definitions/Flags.h>
 
 namespace RHI {
-	enum class ShaderStage : u8 {
+	enum class GfxShaderStageBit : u8 {
 		None = 0,
 		Vertex = BIT(1),
 		Fragment = BIT(2),
@@ -10,5 +11,5 @@ namespace RHI {
 		Compute = BIT(4),
 		All = Vertex | Fragment | Mesh | Compute
 	};
-	CORE_DEFINE_ENUM_FLAG_OPERATORS(ShaderStage);
+	using GfxShaderStageFlags = using Flags<GfxShaderStageBit>
 }

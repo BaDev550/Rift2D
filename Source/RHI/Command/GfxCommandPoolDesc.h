@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 
 namespace RHI {
 	enum class GfxCommandPoolUsage : u8 {

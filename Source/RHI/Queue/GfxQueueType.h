@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 
 namespace RHI {
-	enum class QueueType : u8 {
+	enum class GfxQueueType : u8 {
 		Graphics = 0,
 		Compute,
 		Transfer

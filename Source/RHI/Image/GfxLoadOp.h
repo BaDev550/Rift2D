@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 
 namespace RHI {
-	enum class ImageLoadOp : u8 {
+	enum class GfxImageOp : u8 {
 		Load,
 		Clear,
 		DontCare

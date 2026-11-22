@@ -1,6 +1,6 @@
 #include "ComponentRegistry.h"
 
-#include <Runtime/Definitions/Logger.h>
+#include <Runtime/Debug/Logger.h>
 #include <Runtime/Memory/Allocator.h> // memory ismini sikicem
 
 namespace Rift::Engine {

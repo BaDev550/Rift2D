@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Engine/Core/Engine.h>
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 #include <Runtime/Reflection/ReflectObject.h>
 #include <Runtime/RHI/Image/RHIImageLayout.h>
 #include <Engine/Render/RenderFrame.h>

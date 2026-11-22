@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Engine/World/Components/BaseComponent.h>
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 
 namespace Rift::Engine {
 	RCLASS();

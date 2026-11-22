@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 #include <Engine/World/System.h>
 #include <Engine/Scripting/GameObject.h>
 

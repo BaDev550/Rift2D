@@ -1,7 +1,7 @@
 #include <Engine/Plugin/PluginSystem.h>
 #include <Engine/Platform/Window/WindowSubsystem.h>
 
-#include <Runtime/Definitions/Logger.h>
+#include <Runtime/Debug/Logger.h>
 
 #ifdef _WIN32
 #include <windows.h>

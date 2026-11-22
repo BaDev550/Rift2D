@@ -6,7 +6,7 @@
 #include <Engine/Platform/PlatformSystem.h>
 #include <Engine/Asset/AssetSubsystem.h>
 
-#include <Runtime/Definitions/Profiler.h>
+#include <Runtime/Debug/Profiler.h>
 
 #include <queue>
 #include <imgui.h>

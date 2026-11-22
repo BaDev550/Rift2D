@@ -1,9 +1,9 @@
 #pragma once
 
 #include <Engine/Core/Core.h>
-#include <Runtime/Definitions/Types.h>
-#include <Runtime/Definitions/Logger.h>
-#include <Runtime/Containers/Result.h>
+#include <Core/Types.h>
+#include <Runtime/Debug/Logger.h>
+#include <Core/Result.h>
 #include <string>
 #include <typeinfo>
 #include <typeindex>

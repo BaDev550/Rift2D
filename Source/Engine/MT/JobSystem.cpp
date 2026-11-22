@@ -1,6 +1,6 @@
 #include <Engine/MT/JobSystem.h>
 
-#include <Runtime/Definitions/Logger.h>
+#include <Runtime/Debug/Logger.h>
 
 #include <algorithm>
 #include <exception>

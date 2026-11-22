@@ -1,15 +1,15 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 
 namespace RHI {
-	enum class SemaphoreType : u8 {
+	enum class GfxSemaphoreType : u8 {
 		Binary = 0,
 		Timeline
 	};
 
-	struct FenceDesc {
-		SemaphoreType type = SemaphoreType::Binary;
-		int initialValue = 0;
+	struct GfxFenceDesc {
+		GfxSemaphoreType type = GfxSemaphoreType::Binary;
+		int32 initialValue = 0;
 	};
 }

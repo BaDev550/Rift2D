@@ -1,7 +1,7 @@
 #include "ImageCompressor.h"
 
-#include <Runtime/Definitions/Logger.h>
-#include <Runtime/Definitions/Profiler.h>
+#include <Runtime/Debug/Logger.h>
+#include <Runtime/Debug/Profiler.h>
 
 namespace Rift::Engine {
 	b8 ImageCompressor::CompressImageToBC3(u8* rawData, u32 width, u32 height, std::vector<u8>& compressedImage) {

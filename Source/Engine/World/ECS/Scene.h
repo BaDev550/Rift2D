@@ -4,7 +4,7 @@
 #include <Engine/World/ECS/ComponentStorage.h>
 #include <Engine/Scripting/GameObject.h>
 
-#include <Runtime/Containers/UUID.h>
+#include <Core/UUID.h>
 #include <unordered_map>
 
 namespace Rift::Engine {

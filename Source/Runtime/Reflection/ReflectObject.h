@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 #include <Runtime/Reflection/Macros.h>
 #include <string_view>
 

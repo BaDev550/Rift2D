@@ -2,9 +2,18 @@
 #include <Engine/Core/Core.h>
 
 namespace RHI {
-	struct SwapchainDesc {
+	enum class PresentMode {
+		Instant = 0,
+		Vsync,
+		Mailbox
+	};
+
+	struct GfxSwapchainDesc {
 		u32 width;
 		u32 height;
-		bool vsync = true;
+		
+		GfxFormat colorFormat = GfxFormat::RGBA8;
+		GfxFormat depthFormat = GfxFormat::D32_SFLOAT;
+		PresentMode presentMode = PresentMode::Instant;
 	};
 }

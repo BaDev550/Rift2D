@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Widget/Widget.h>
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 
 RCLASS();
 class EditorDockspaceWidget : public Widget {

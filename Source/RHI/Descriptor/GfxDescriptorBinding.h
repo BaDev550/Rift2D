@@ -1,19 +1,19 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 #include <Runtime/Definitions/Flags.h>
 #include <RHI/Descriptor/GfxDescriptorType.h>
 #include <RHI/Shader/ShaderStage.h>
 
 namespace RHI {
-	enum class DescriptorBindingBit : u8 {
+	enum class GfxDescriptorBindingBit : u8 {
 		None = 0,
 		PartiallyBound = BIT(1),
 		UpdateAfterBind = BIT(2)
 	};
-	using DescriptorBindingFlags = Flags<DescriptorBindingBit>;
+	using GfxDescriptorBindingFlags = Flags<GfxDescriptorBindingBit>;
 	
-	struct DescriptorBindingDesc {
+	struct GfxDescriptorBindingDesc {
 		u32 count = 1;
 		DescriptorType type = DescriptorType::SampledImage;
 		ShaderStage stage = ShaderStage::All;

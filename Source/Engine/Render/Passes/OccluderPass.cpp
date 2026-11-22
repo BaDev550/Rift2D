@@ -1,10 +1,10 @@
 #include "OccluderPass.h"
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 #include <Engine/Asset/AssetSubsystem.h>
 #include <Engine/Platform/Window/WindowSubsystem.h>
 #include <Engine/Graphics/GraphicsSubsystem.h>
 #include <Engine/Asset/Shader/Shader.h>
-#include <Runtime/Definitions/Profiler.h>
+#include <Runtime/Debug/Profiler.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

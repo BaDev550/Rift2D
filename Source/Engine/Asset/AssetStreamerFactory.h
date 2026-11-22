@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Engine/Core/Core.h>
-#include <Runtime/Definitions/Logger.h>
+#include <Runtime/Debug/Logger.h>
 #include <functional>
 #include <typeindex>
 

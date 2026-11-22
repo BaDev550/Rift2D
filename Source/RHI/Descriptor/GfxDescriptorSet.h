@@ -1,16 +1,16 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 #include <RHI/Descriptor/GfxDescriptorType.h>
 #include <RHI/Descriptor/GfxDescriptorSetAllocInfo.h>
 
 #include <RHI/Object/GfxObject.h>
 
 namespace RHI {
-	class Image;
-	class Buffer;
+	class GfxImage;
+	class GfxBuffer;
 
-	class DescriptorSet : public Object {
+	class GfxDescriptorSet : public Object {
 	public:
 		using Object::Object;
 		virtual ~DescriptorSet() = default;

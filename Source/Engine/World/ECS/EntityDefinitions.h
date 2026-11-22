@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
-#include <Runtime/Containers/UUID.h>
+#include <Core/Types.h>
+#include <Core/UUID.h>
 #include <bitset>
 
 namespace Rift::Engine {

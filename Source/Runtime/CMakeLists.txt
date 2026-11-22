@@ -2,25 +2,17 @@
 add_library(Runtime SHARED ${SOURCECODE})
 
 find_package(imgui CONFIG REQUIRED)
-find_package(glm CONFIG REQUIRED)
-find_package(Vulkan REQUIRED)
 find_package(unofficial-shaderc CONFIG REQUIRED)
-find_package(VulkanMemoryAllocator CONFIG REQUIRED)
 
-target_compile_definitions(Runtime 
-    PRIVATE 
-        ENGINE_EXPORTS
-        "RUNTIME_API=__declspec(dllexport)"
-    INTERFACE
-        "RUNTIME_API=__declspec(dllimport)"
-)
+configure_dll_exports(Runtime)
+add_target_defines(Runtime)
+
 target_include_directories(Runtime PUBLIC "${CMAKE_SOURCE_DIR}/Source")
 target_link_libraries(Runtime 
     PUBLIC 
-        glm::glm-header-only
         imgui::imgui
     PRIVATE
-        Vulkan::Vulkan
-	    GPUOpen::VulkanMemoryAllocator
+        Core
+        Math
         unofficial::shaderc::shaderc
 )

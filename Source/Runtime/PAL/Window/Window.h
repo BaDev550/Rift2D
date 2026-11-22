@@ -1,6 +1,6 @@
 #pragma once
 #include <Runtime/PAL/Window/WindowDesc.h>
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 #include <string>
 
 namespace Runtime::PAL {

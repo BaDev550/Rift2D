@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Engine/Scripting/GameObject.h>
-#include <Runtime/Definitions/Logger.h>
+#include <Runtime/Debug/Logger.h>
 
 #include <Engine/Asset/AssetSubsystem.h>
 #include <Engine/Graphics/GraphicsSubsystem.h>

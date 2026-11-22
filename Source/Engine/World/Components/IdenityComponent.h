@@ -1,8 +1,8 @@
 #pragma once
 
 #include <Engine/World/Components/BaseComponent.h>
-#include <Runtime/Definitions/Types.h>
-#include <Runtime/Containers/UUID.h>
+#include <Core/Types.h>
+#include <Core/UUID.h>
 
 namespace Rift::Engine {
 	RCLASS();

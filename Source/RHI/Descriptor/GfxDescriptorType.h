@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 
 namespace RHI {
-	enum class DescriptorType : u8 {
+	enum class GfxDescriptorType : u8 {
 		Sampler,
 		SampledImage,
 		StorageImage,

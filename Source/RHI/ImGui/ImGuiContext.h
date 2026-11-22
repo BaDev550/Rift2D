@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 #include <RHI/Command/GfxCommandBuffer.h>
 #include <RHI/Descriptor/GfxDescriptorSet.h>
 #include <imgui.h>

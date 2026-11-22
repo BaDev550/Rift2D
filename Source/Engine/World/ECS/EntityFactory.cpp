@@ -1,5 +1,5 @@
 #include "EntityFactory.h"
-#include <Runtime/Definitions/Logger.h>
+#include <Runtime/Debug/Logger.h>
 
 namespace Rift::Engine {
 	EntityFactory::EntityFactory() {

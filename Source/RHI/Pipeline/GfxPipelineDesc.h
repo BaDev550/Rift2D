@@ -1,24 +1,27 @@
 #pragma once
 #include <Engine/Core/Core.h>
 
-#include <RHI/Pipeline/GfxVertexAttributeDesc.h>
 #include <RHI/Shader/ShaderDesc.h>
+#include <RHI/Pipeline/GfxVertexAttributeDesc.h>
 #include <RHI/Pipeline/GfxPushConstantRange.h>
+#include <RHI/Pipeline/GfxPipelineDepth.h>
+#include <RHI/Pipeline/GfxPipelineBlending.h>
 #include <vector>
 
 namespace RHI {
-	struct PipelineDesc {
+	struct GfxPipelineDesc {
 		ShaderDesc* vertexShader = nullptr;
 		ShaderDesc* fragmentShader = nullptr;
 		ShaderDesc* computeShader = nullptr;
 
-		bool depthTest = true;
-		bool blending = true;
-		VertexInputDesc inputDesc;
+		GfxDepthTest depthTest = GfxDepthTest::Enabled;
+		GfxCompareOp depthCompareOp = GfxCompareOp::Less;
+		GfxBlending blending = GfxBlending::Enabled;
 
-		std::vector<PushConstantRange> pushConstantRanges;
+		GfxVertexInputDesc inputDesc;
+		std::vector<GfxPushConstantRange> pushConstantRanges;
 
-		std::vector<Format> colorFormats;
-		Format depthFormat;
+		std::vector<GfxFormat> colorFormats;
+		GfxFormat depthFormat;
 	};
 }

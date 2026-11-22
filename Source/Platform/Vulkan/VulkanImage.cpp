@@ -3,7 +3,7 @@
 #include <Runtime/Vulkan/VulkanUtils.h>
 #include <Runtime/RHI/Common/RHIUtils.h>
 
-#include <Runtime/Definitions/Logger.h>
+#include <Runtime/Debug/Logger.h>
 
 namespace Runtime::RHI {
 	VulkanImage::VulkanImage(Context* context, const ImageDesc& desc) : Image(context), _desc(desc) { }

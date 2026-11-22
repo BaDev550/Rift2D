@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
-#include <Runtime/Definitions/Logger.h>
+#include <Core/Types.h>
+#include <Runtime/Debug/Logger.h>
 #include <Runtime/Memory/Allocator.h>
 #include <Runtime/Reflection/Property.h>
 #include <functional>

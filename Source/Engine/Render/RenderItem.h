@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 #include <Runtime/RHI/Buffer/RHIBuffer.h>
 #include <Runtime/Math/Mat4.h>
 

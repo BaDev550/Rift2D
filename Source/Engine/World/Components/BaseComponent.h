@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 #include <Runtime/Reflection/ReflectObject.h>
 
 namespace Rift::Engine {

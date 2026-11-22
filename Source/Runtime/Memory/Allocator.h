@@ -1,5 +1,5 @@
 #pragma once
-#include <Runtime/Definitions/Types.h>
+#include <Core/Types.h>
 
 #include <memory>
 #include <unordered_map>

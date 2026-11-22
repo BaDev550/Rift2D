@@ -6,13 +6,6 @@
 
 #define PI 3.141592653589793f
 #define BIT(x) (1 << x)
-#define CORE_DEFINE_ENUM_FLAG_OPERATORS(Enum) \
-    inline Enum operator|(Enum lhs, Enum rhs) { \
-        return static_cast<Enum>(static_cast<std::underlying_type_t<Enum>>(lhs) | static_cast<std::underlying_type_t<Enum>>(rhs)); \
-    } \
-    inline Enum operator&(Enum lhs, Enum rhs) { \
-        return static_cast<Enum>(static_cast<std::underlying_type_t<Enum>>(lhs) & static_cast<std::underlying_type_t<Enum>>(rhs)); \
-    }
 
 using u8 =	uint8_t;
 using u16 = uint16_t;

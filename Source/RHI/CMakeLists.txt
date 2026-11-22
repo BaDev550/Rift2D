@@ -1,8 +1,4 @@
-﻿file(GLOB_RECURSE SOURCECODE CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/*.h") 
-add_library(RHI STATIC ${SOURCECODE})
+﻿add_library(RHI INTERFACE)
 
-target_include_directories(RHI PUBLIC "${CMAKE_SOURCE_DIR}/Source")
-target_link_libraries(RHI
-    PRIVATE
-        Runtime
-)
+target_include_directories(RHI INTERFACE "${CMAKE_SOURCE_DIR}/Source/RHI")
+target_link_libraries(RHI INTERFACE Math)

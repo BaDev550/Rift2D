@@ -3,7 +3,7 @@
 
 #include <Engine/Asset/Asset.h>
 #include <Runtime/Memory/Allocator.h>
-#include <Runtime/Definitions/Profiler.h>
+#include <Runtime/Debug/Profiler.h>
 
 #include <Engine/Platform/PlatformSystem.h>
 #include <Runtime/IO/Path.h>

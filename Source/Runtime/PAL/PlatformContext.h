@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Runtime/Definitions/Types.h>
-#include <Runtime/Containers/Result.h>
-#include <Runtime/PAL/Window/Window.h>
+#include <Core/Types.h>
+#include <Core/Result.h>
 #include <Runtime/IO/Path.h>
+#include <Runtime/PAL/Window/Window.h>
 #include <vector>
 
 namespace Runtime::PAL{

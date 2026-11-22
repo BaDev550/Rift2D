@@ -1,10 +1,10 @@
 #pragma once
 
-#include <Runtime/Containers/UUID.h>
-#include <Runtime/Definitions/Logger.h>
+#include <Core/UUID.h>
 #include <chrono>
 #include <list>
 #include <string_view>
+#include <Runtime/Debug/Logger.h>
 
 namespace Runtime {
 	class RUNTIME_API Profiler final {

@@ -2,7 +2,7 @@
 #include <Engine/Core/Core.h>
 
 namespace RHI {
-	enum class ImageTileMode : u8 {
+	enum class GfxImageTileMode : u8 {
 		Undefined = 0,
 		Repeat,
 		Mirror,

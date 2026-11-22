@@ -3,10 +3,10 @@
 #include <RHI/Object/GfxObject.h>
 
 namespace RHI {
-	class Fence : public Object {
+	class GfxFence : public GfxObject {
 	public:
-		using Object::Object;
-		virtual ~Fence() = default;
+		using GfxObject::GfxObject;
+		virtual ~GfxFence() = default;
 
 		virtual void Wait(u64 value) = 0;
 		virtual void Signal(u64 value) = 0;
