@@ -4,8 +4,7 @@
 #include <Runtime/PAL/PlatformEvent.h>
 #include <string>
 
-namespace Runtime::PAL {
-	using PALInstance = uptr;
+namespace PAL {
 	using WindowHandle = uptr;
 	
 	struct WindowDesc {

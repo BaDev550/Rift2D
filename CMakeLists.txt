@@ -23,7 +23,7 @@ endif()
 
 add_subdirectory("Source/Core")
 add_subdirectory("Source/Math")
-#add_subdirectory("Source/Engine")
+add_subdirectory("Source/Engine")
 add_subdirectory("Source/Runtime")
 add_subdirectory("Source/RHI")
 #add_subdirectory("Source/RiftEditor")

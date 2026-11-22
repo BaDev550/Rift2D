@@ -4,7 +4,7 @@
 #include <Runtime/PAL/KeyCodes.h>
 #include <functional>
 
-namespace Runtime::PAL {
+namespace PAL {
 	enum class PlatformEventType : u8 {
 		None = 0,
 		WindowResize,
@@ -36,7 +36,6 @@ namespace Runtime::PAL {
 	private:
 		KeyCode _key;
 	};
-
 
 	class PlatformKeyReleasedEvent final : public PlatformEvent {
 	public:

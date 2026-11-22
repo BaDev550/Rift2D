@@ -5,7 +5,6 @@ add_reflection(Engine)
 include(NVTT)
 
 find_package(imgui CONFIG REQUIRED)
-find_package(glm CONFIG REQUIRED)
 find_package(unofficial-shaderc CONFIG REQUIRED)
 find_package(stb REQUIRED)
 find_package(nlohmann_json REQUIRED)
@@ -32,7 +31,6 @@ target_include_directories(Engine
 target_link_libraries(Engine 
     PUBLIC 
         Runtime
-        glm::glm-header-only
     PRIVATE
         imgui::imgui
         nlohmann_json::nlohmann_json
